@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WeHa Lens | Danh mục đầu tư</title>
+
+    <link rel="icon" href="assets/img/logo.png">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/portfolio.css">
+
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <a href="index.html">
+                <img src="assets/img/logo.png" class="logo">
+            </a>
+
+            <div>
+
+                <h1>WeHa Lens</h1>
+
+                <p>Danh mục đầu tư</p>
+
+            </div>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <div id="today"></div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= SUMMARY ================= -->
+
+    <section class="summary">
+
+        <div class="summary-card">
+
+            <span>Tổng số mã</span>
+
+            <h2 id="totalTicker">0</h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <span>Win Rate</span>
+
+            <h2 id="winRate">0%</h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <span>P/L trung bình</span>
+
+            <h2 id="avgPnL">0%</h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <span>Đang nắm giữ</span>
+
+            <h2 id="holdingCount">0</h2>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= TOOLBAR ================= -->
+
+    <section class="toolbar">
+
+        <div class="toolbar-left">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Tìm mã cổ phiếu..."
+            >
+
+        </div>
+
+        <div class="toolbar-right">
+
+            <select id="signalFilter">
+
+                <option value="ALL">Tất cả tín hiệu</option>
+
+            </select>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= TABLE ================= -->
+
+    <section class="table-wrapper">
+
+        <table class="portfolio-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Mã</th>
+
+                    <th>Tín hiệu</th>
+
+                    <th>Nguồn</th>
+
+                    <th>Giá mua</th>
+
+                    <th>Vùng mua</th>
+
+                    <th>Giá hiện tại</th>
+
+                    <th>P/L</th>
+
+                    <th>Ngày mua</th>
+
+                    <th>Holding</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="portfolioTable">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+
+    <!-- ================= EMPTY ================= -->
+
+    <section id="emptyState" class="empty-state" style="display:none;">
+
+        <img src="assets/img/empty.png">
+
+        <h3>Không có dữ liệu</h3>
+
+        <p>Không tìm thấy cổ phiếu phù hợp.</p>
+
+    </section>
+
+
+
+    <!-- ================= LOADING ================= -->
+
+    <section id="loading" class="loading">
+
+        Đang tải dữ liệu...
+
+    </section>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div>
+
+            © 2026 WeHa Lens
+
+        </div>
+
+        <div>
+
+            Wealth & Happiness
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ================= JS ================= -->
+
+    <script src="assets/js/common.js"></script>
+
+    <script src="assets/js/portfolio.js"></script>
+
+</body>
+
+</html>
