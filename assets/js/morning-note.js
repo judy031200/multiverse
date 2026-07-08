@@ -2,14 +2,28 @@ const API =
 "https://script.google.com/macros/s/AKfycbz8Q2jROUEg6PMEtpH5tyKgUZhV0mZ-hRCMknYoK2fZrqVt8ES9oVS7Y49OihjG8DwOMg/exec?sheet=morning";
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    // Load ngày mới nhất
     loadMorning();
+
+    // Chọn ngày
+    document.getElementById("noteDate").addEventListener("change", function () {
+        loadMorning(this.value);
+    });
+
 });
 
-async function loadMorning() {
+async function loadMorning(date = "") {
 
     try {
 
-        const res = await fetch(API);
+        let url = API;
+
+        if (date) {
+            url += "&date=" + date;
+        }
+
+        const res = await fetch(url);
 
         if (!res.ok) {
             throw new Error(`HTTP ${res.status}`);
@@ -17,11 +31,17 @@ async function loadMorning() {
 
         const data = await res.json();
 
-        // ===== Ngày =====
+        // ===== Hiển thị ngày =====
+
         document.getElementById("today").textContent =
             formatDate(data.morning.today);
 
-        // ===== Morning Note =====
+        // Đưa ngày lên ô input
+        document.getElementById("noteDate").value =
+            formatInputDate(data.morning.today);
+
+        // ===== Nội dung =====
+
         document.getElementById("international").innerHTML =
             data.morning.international || "";
 
@@ -34,7 +54,6 @@ async function loadMorning() {
         document.getElementById("other").innerHTML =
             data.morning.other || "";
 
-        // ===== Market =====
         renderMarket(data.indexes || []);
 
     } catch (err) {
@@ -74,7 +93,6 @@ function renderMarket(list) {
             Number(item.pctChange) >= 0 ? "up" : "down";
 
         return `
-
         <tr>
 
             <td>${item.name}</td>
@@ -87,17 +105,14 @@ function renderMarket(list) {
             </td>
 
             <td class="${changeClass}">
-                ${Number(item.netChange)>0?"+":""}
-                ${Number(item.netChange).toFixed(2)}
+                ${Number(item.netChange)>0?"+":""}${Number(item.netChange).toFixed(2)}
             </td>
 
             <td class="${pctClass}">
-                ${Number(item.pctChange)>0?"+":""}
-                ${Number(item.pctChange).toFixed(2)}%
+                ${Number(item.pctChange)>0?"+":""}${Number(item.pctChange).toFixed(2)}%
             </td>
 
         </tr>
-
         `;
 
     }).join("");
@@ -116,5 +131,22 @@ function formatDate(dateString){
         month:"2-digit",
         year:"numeric"
     });
+
+}
+
+// Chuyển sang yyyy-MM-dd để input date hiểu
+function formatInputDate(dateString){
+
+    if(!dateString) return "";
+
+    const d = new Date(dateString);
+
+    const yyyy = d.getFullYear();
+
+    const mm = String(d.getMonth()+1).padStart(2,"0");
+
+    const dd = String(d.getDate()).padStart(2,"0");
+
+    return `${yyyy}-${mm}-${dd}`;
 
 }
