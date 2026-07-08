@@ -96,7 +96,7 @@ body.morning-page{
     gap:18px;
 }
 
-.news-card,.market-card{
+.news-card{
   border:1px solid #e6ebf2;
   border-radius:8px;
   background:#fff;
@@ -104,7 +104,7 @@ body.morning-page{
   overflow:hidden;
 }
 
-.news-card .title,.market-card h2{
+.news-card .title{
   margin:0;
   padding:14px 16px;
   color:#082f66;
@@ -194,7 +194,62 @@ footer{
     margin-bottom:12px;
 
 }
+.market-item{
 
+    background:#fff;
+
+    border-radius:10px;
+
+    border-top:5px solid #082f66;
+
+    border:1px solid #e7edf5;
+
+    padding:16px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+    transition:.2s;
+
+}
+
+.market-item:hover{
+
+    transform:translateY(-3px);
+
+}
+.market-name{
+
+    font-size:12px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    color:#667085;
+
+    margin-bottom:10px;
+
+}
+.market-value{
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#082f66;
+
+    margin-bottom:8px;
+
+}
+.market-change{
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
 .market-strip-grid{
 
     display:grid;
@@ -221,14 +276,39 @@ footer{
 #btnExport:hover{background:#0b3f86}
 
 @media(max-width:900px){
-  body.morning-page{padding:14px}
-  .wrapper{grid-template-columns:1fr}
-  .right-panel{position:static}
-  .morning-page .header{align-items:flex-start}
-  .morning-page h1{font-size:28px}
+
+    body.morning-page{
+        padding:14px;
+    }
+
+    .morning-page .header{
+        align-items:flex-start;
+    }
+
+    .morning-page h1{
+        font-size:28px;
+    }
+
+    .market-strip-grid{
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
 }
 
 @media(max-width:640px){
+  .market-strip-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+.market-value{
+
+    font-size:22px;
+
+}
   .morning-page .header{flex-direction:column}
   .morning-page .header-right{text-align:left}
   .morning-page .logo{width:120px;height:58px}
