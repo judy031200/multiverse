@@ -1,0 +1,174 @@
+/* ===========================
+   WeHa Layout
+=========================== */
+
+:root{
+
+    --primary:#C89B3C;
+    --primary-dark:#A67D28;
+
+    --bg:#F5F7FA;
+
+    --card:#FFFFFF;
+
+    --border:#E8EAF0;
+
+    --text:#222;
+
+    --shadow:0 8px 30px rgba(0,0,0,.08);
+
+    --radius:16px;
+
+}
+
+body{
+
+    margin:0;
+
+    background:var(--bg);
+
+    font-family:"Be Vietnam Pro",sans-serif;
+
+    color:var(--text);
+
+}
+
+/* ===========================
+HEADER
+=========================== */
+
+.site-header{
+
+    background:white;
+
+    box-shadow:var(--shadow);
+
+    padding:18px 40px;
+
+}
+
+.header-inner{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.brand img{
+
+    width:54px;
+
+}
+
+.brand h1{
+
+    margin:0;
+
+    font-size:30px;
+
+    font-weight:800;
+
+}
+
+.brand p{
+
+    margin:2px 0 0;
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+/* ===========================
+TABS
+=========================== */
+
+.site-tabs{
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+
+}
+
+.site-tabs a{
+
+    text-decoration:none;
+
+    color:#555;
+
+    background:#F3F4F7;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    transition:.2s;
+
+    font-weight:600;
+
+}
+
+.site-tabs a:hover{
+
+    background:#ECECEC;
+
+}
+
+.site-tabs a.active{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* ===========================
+CONTENT
+=========================== */
+
+.page{
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:35px;
+
+}
+
+/* ===========================
+FOOTER
+=========================== */
+
+.site-footer{
+
+    margin-top:50px;
+
+    padding:30px;
+
+    text-align:center;
+
+    color:#888;
+
+    font-size:14px;
+
+}
