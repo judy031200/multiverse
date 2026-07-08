@@ -5,29 +5,33 @@ body.morning-page{
   padding:24px;
 }
 
+/* ================= HEADER ================= */
+
 .morning-page .header{
-  max-width:1240px;
+  max-width:1400px;
   margin:0 auto 12px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:24px;
   border:1px solid rgba(8,47,102,.12);
-  border-radius:8px;
-  padding:18px 22px;
+  border-radius:10px;
+  padding:18px 24px;
   background:
     linear-gradient(120deg,rgba(255,255,255,.96),rgba(248,251,255,.92)),
     radial-gradient(circle at 88% 20%,rgba(242,194,48,.28),transparent 34%);
-  box-shadow:0 22px 60px rgba(8,47,102,.10);
+  box-shadow:0 18px 45px rgba(8,47,102,.10);
 }
 
-.morning-page .header-left{display:flex;align-items:center}
+.morning-page .header-left{
+  display:flex;
+  align-items:center;
+}
+
 .morning-page .logo{
   width:150px;
   height:70px;
   object-fit:contain;
-  object-position:left center;
-  mix-blend-mode:multiply;
 }
 
 .morning-page .header-right{
@@ -36,10 +40,9 @@ body.morning-page{
 }
 
 .morning-page h1{
+  margin:0 0 6px;
   font-size:34px;
   line-height:1.05;
-  margin:0 0 6px;
-  letter-spacing:0;
 }
 
 .morning-page .sub-title{
@@ -56,17 +59,19 @@ body.morning-page{
   color:#667085;
 }
 
+/* ================= MENU ================= */
+
 .morning-tabs{
-  max-width:1240px;
-  margin:0 auto 16px;
+  max-width:1400px;
+  margin:0 auto 18px;
   display:flex;
   gap:6px;
   overflow-x:auto;
   border:1px solid rgba(8,47,102,.10);
-  border-radius:8px;
-  padding:7px;
-  background:rgba(255,255,255,.9);
-  box-shadow:0 10px 28px rgba(8,47,102,.06);
+  border-radius:10px;
+  padding:8px;
+  background:#fff;
+  box-shadow:0 8px 25px rgba(8,47,102,.06);
 }
 
 .morning-tabs a{
@@ -79,81 +84,167 @@ body.morning-page{
   font-weight:600;
 }
 
-.morning-tabs a:hover{background:#f2f7fd;color:#0d4f9f}
-.morning-tabs a.active{
-  color:#082f66;
-  background:linear-gradient(180deg,#fff,#f7fbff);
-  box-shadow:0 7px 18px rgba(8,47,102,.08);
+.morning-tabs a:hover{
+  background:#f2f7fd;
+  color:#0d4f9f;
 }
 
+.morning-tabs a.active{
+  color:#082f66;
+  background:#f7fbff;
+  box-shadow:0 4px 10px rgba(8,47,102,.08);
+}
+
+/* ================= LAYOUT ================= */
+
 .wrapper{
-    max-width:1400px;
-    margin:0 auto;
+  max-width:1400px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(420px,30%);
+  gap:24px;
+  align-items:start;
 }
 
 .left-panel{
-    display:grid;
-    gap:18px;
+  display:grid;
+  gap:18px;
 }
 
-.news-card{
-  border:1px solid #e6ebf2;
-  border-radius:8px;
+.right-panel{
+  position:sticky;
+  top:18px;
+}
+
+/* ================= CARD ================= */
+
+.news-card,
+.market-card{
   background:#fff;
-  box-shadow:0 12px 30px rgba(15,35,67,.045);
+  border:1px solid #e6ebf2;
+  border-radius:10px;
+  box-shadow:0 12px 30px rgba(15,35,67,.05);
   overflow:hidden;
 }
 
-.news-card .title{
+.news-card .title,
+.market-card h2{
   margin:0;
-  padding:14px 16px;
-  color:#082f66;
-  border-bottom:1px solid #edf1f6;
-  background:linear-gradient(180deg,#fbfdff,#f7fafc);
+  padding:15px 18px;
   font-size:14px;
-  letter-spacing:.03em;
+  font-weight:700;
+  color:#082f66;
+  background:#f8fbff;
+  border-bottom:1px solid #edf1f6;
 }
 
 .news-card > div:not(.title){
-  padding:14px 16px 16px;
+  padding:18px;
+  line-height:1.8;
   color:#344054;
-  line-height:1.7;
 }
 
-.news-card a{color:#0d4f9f}
+.news-card ul{
+  margin:0;
+  padding-left:20px;
+}
 
-.market-table th:first-child,.market-table td:first-child{text-align:left}
+.news-card li{
+  margin-bottom:10px;
+}
+
+.news-card b{
+  color:#082f66;
+}
+
+.news-card i{
+  color:#667085;
+}
+
+/* ================= MARKET ================= */
+
+.market-card{
+  padding-bottom:8px;
+}
+
+.market-table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+
+.market-table th,
+.market-table td{
+  padding:12px;
+  border-bottom:1px solid #edf1f6;
+  font-size:13px;
+}
+
 .market-table th{
+  background:#f8fafc;
   color:#667085;
   font-size:11px;
   text-transform:uppercase;
-  letter-spacing:.06em;
-  background:#f8fafc;
+  letter-spacing:.05em;
 }
 
-.up{color:#12976d;font-weight:800}
-.down{color:#b94747;font-weight:800}
+.market-table th:nth-child(1),
+.market-table td:nth-child(1){
+  width:42%;
+  text-align:left;
+}
+
+.market-table th:nth-child(2),
+.market-table td:nth-child(2){
+  width:22%;
+  text-align:right;
+}
+
+.market-table th:nth-child(3),
+.market-table td:nth-child(3){
+  width:18%;
+  text-align:right;
+}
+
+.market-table th:nth-child(4),
+.market-table td:nth-child(4){
+  width:18%;
+  text-align:right;
+}
+
+.up{
+  color:#12976d;
+  font-weight:700;
+}
+
+.down{
+  color:#d63939;
+  font-weight:700;
+}
+
+/* ================= WATERMARK ================= */
 
 .watermark{
   position:fixed;
   right:28px;
   bottom:90px;
-  pointer-events:none;
-  color:rgba(8,47,102,.05);
-  font-size:96px;
+  font-size:100px;
   font-weight:800;
-  letter-spacing:.02em;
+  color:rgba(8,47,102,.04);
+  pointer-events:none;
 }
 
+/* ================= FOOTER ================= */
+
 footer{
-  max-width:1240px;
-  margin:18px auto 0;
+  max-width:1400px;
+  margin:20px auto 0;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:16px;
+  align-items:center;
+  gap:20px;
   border-top:1px solid #e6ebf2;
-  padding-top:14px;
+  padding-top:16px;
   color:#667085;
   font-size:13px;
 }
@@ -168,151 +259,81 @@ footer{
   width:86px;
   height:42px;
   object-fit:contain;
-  object-position:right center;
-  mix-blend-mode:multiply;
-}
-/* ===========================
-   MARKET STRIP
-=========================== */
-
-.market-strip{
-
-    max-width:1400px;
-
-    margin:0 auto 22px;
-
 }
 
-.market-strip-title{
+/* ================= EXPORT ================= */
 
-    font-size:15px;
-
-    font-weight:700;
-
-    color:#082f66;
-
-    margin-bottom:12px;
-
-}
-.market-item{
-
-    background:#fff;
-
-    border-radius:10px;
-
-    border-top:5px solid #082f66;
-
-    border:1px solid #e7edf5;
-
-    padding:16px;
-
-    text-align:center;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.05);
-
-    transition:.2s;
-
-}
-
-.market-item:hover{
-
-    transform:translateY(-3px);
-
-}
-.market-name{
-
-    font-size:12px;
-
-    font-weight:700;
-
-    text-transform:uppercase;
-
-    color:#667085;
-
-    margin-bottom:10px;
-
-}
-.market-value{
-
-    font-size:28px;
-
-    font-weight:800;
-
-    color:#082f66;
-
-    margin-bottom:8px;
-
-}
-.market-change{
-
-    font-size:15px;
-
-    font-weight:700;
-
-}
-.market-strip-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-
-    gap:14px;
-
-}
 #btnExport{
   position:fixed;
   right:24px;
   bottom:24px;
-  border:0;
-  border-radius:6px;
+  border:none;
+  border-radius:8px;
   background:#082f66;
   color:#fff;
-  font-weight:800;
-  padding:12px 16px;
-  box-shadow:0 12px 28px rgba(8,47,102,.18);
+  font-weight:700;
+  padding:12px 18px;
   cursor:pointer;
+  box-shadow:0 12px 30px rgba(8,47,102,.20);
 }
 
-#btnExport:hover{background:#0b3f86}
+#btnExport:hover{
+  background:#0d4f9f;
+}
 
-@media(max-width:900px){
+/* ================= RESPONSIVE ================= */
 
-    body.morning-page{
-        padding:14px;
-    }
+@media (max-width:1200px){
 
-    .morning-page .header{
-        align-items:flex-start;
-    }
-
-    .morning-page h1{
-        font-size:28px;
-    }
-
-    .market-strip-grid{
-
-        grid-template-columns:repeat(3,1fr);
-
-    }
+  .wrapper{
+    grid-template-columns:minmax(0,1fr) 380px;
+  }
 
 }
 
-@media(max-width:640px){
-  .market-strip-grid{
+@media (max-width:992px){
 
-    grid-template-columns:repeat(2,1fr);
+  body.morning-page{
+    padding:16px;
+  }
+
+  .wrapper{
+    grid-template-columns:1fr;
+  }
+
+  .right-panel{
+    position:static;
+  }
 
 }
 
-.market-value{
+@media (max-width:640px){
 
-    font-size:22px;
+  .morning-page .header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 
-}
-  .morning-page .header{flex-direction:column}
-  .morning-page .header-right{text-align:left}
-  .morning-page .logo{width:120px;height:58px}
-  footer{align-items:flex-start;flex-direction:column}
-  #btnExport{right:14px;bottom:14px}
-  .watermark{display:none}
+  .morning-page .header-right{
+    text-align:left;
+  }
+
+  .morning-page h1{
+    font-size:28px;
+  }
+
+  .morning-page .logo{
+    width:120px;
+    height:60px;
+  }
+
+  footer{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .watermark{
+    display:none;
+  }
+
 }
