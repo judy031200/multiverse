@@ -1,62 +1,58 @@
-const API = "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnRq11S_4d67SSXCrSBaBRe3HPc30rTvuqBweHdg3PCFchOiWkDfRUyoNmhlPAZpX9MhkCEtVwIoguTiL7MBLOFqViXSpWXn5vXizhhG8l0v3rsgS3GNDHdAUfbGL9sAoxcCcUAJ9f5jUfCB2QWaOWvW3NLlCpO-u5AA6uBDEodHvchqh1567NbLeBPkA3LQi920WFTXZjMkiEkKDU20PtNvLEz7iIDP0H57wNoa9T9eytqiPBa4Bw0ITSCgbPhXCHsbA28xNlZtg_jnJBxatP2KjTYYvbOAMcP-ne2OKbXeCxIILb8&lib=MnnpPJkA_5FX3uJzldvTmeUx--YUDytHw";
+body{
+    margin:0;
+    font-family:Arial;
+}
 
-async function loadMorning() {
+header{
 
-    const res = await fetch(API);
+display:flex;
 
-    const data = await res.json();
+justify-content:space-between;
 
-    document.getElementById("today").innerHTML =
-        data.morning.today;
+padding:20px;
 
-    document.getElementById("international").innerHTML =
-        data.morning.international;
-
-    document.getElementById("domestic").innerHTML =
-        data.morning.domestic;
-
-    document.getElementById("corporate").innerHTML =
-        data.morning.corporate;
-
-    document.getElementById("other")?.innerHTML =
-        data.morning.other;
-
-    renderMarket(data.indexes);
+background:#e8b11c;
 
 }
 
-function renderMarket(list){
+.container{
 
-    const tbody=document.getElementById("marketTable");
+display:grid;
 
-    tbody.innerHTML="";
+grid-template-columns:70% 30%;
 
-    list.forEach(item=>{
+gap:20px;
 
-        tbody.innerHTML+=`
-        <tr>
-
-            <td>${item.name}</td>
-
-            <td>${Number(item.indexClose).toLocaleString()}</td>
-
-            <td class="${item.netChange>=0?'up':'down'}">
-
-            ${Number(item.netChange).toFixed(2)}
-
-            </td>
-
-            <td class="${item.pctChange>=0?'up':'down'}">
-
-            ${Number(item.pctChange).toFixed(2)}%
-
-            </td>
-
-        </tr>
-        `;
-
-    });
+padding:20px;
 
 }
 
-loadMorning();
+.left section{
+
+margin-bottom:30px;
+
+}
+
+.right{
+
+border-left:2px solid #ddd;
+
+padding-left:20px;
+
+}
+
+.up{
+
+color:#1ca55c;
+
+font-weight:bold;
+
+}
+
+.down{
+
+color:#d93025;
+
+font-weight:bold;
+
+}
