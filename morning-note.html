@@ -10,12 +10,14 @@
 
     <link rel="icon" href="assets/img/logo-cropped.png">
 
+    <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/morning-note.css">
 
@@ -23,12 +25,14 @@
 
 <body class="morning-page">
 
-    <!-- HEADER -->
+    <!-- ================= HEADER ================= -->
 
     <header class="header">
 
         <div class="header-left">
+
             <img src="assets/img/logo-cropped.png" class="logo">
+
         </div>
 
         <div class="header-right">
@@ -36,11 +40,12 @@
             <h1>WeHa Multiverse</h1>
 
             <div class="sub-title">
+
                 Morning Brief for Wealth Investors
+
             </div>
 
             <div id="today"></div>
-
             <div class="date-toolbar">
                 <label for="noteDate">📅 Chọn ngày:</label>
                 <input type="date" id="noteDate">
@@ -49,8 +54,6 @@
         </div>
 
     </header>
-
-    <!-- MENU -->
 
     <nav class="morning-tabs">
         <a href="index.html">Báo cáo</a>
@@ -61,62 +64,64 @@
         <a class="active" href="morning-note.html">Bản tin sáng</a>
     </nav>
 
-    <!-- CHỈ SỐ -->
-
-    <section class="market-strip">
-
-        <div class="market-strip-title">
-
-            📊 Chỉ số thị trường
-
-        </div>
-
-        <div id="marketCards" class="market-strip-grid">
-
-        </div>
-
-    </section>
-
-    <!-- MAIN -->
+    <!-- ================= MAIN ================= -->
 
     <main class="wrapper">
 
+        <!-- LEFT -->
+
         <section class="left-panel">
+
+            <!-- Quốc tế -->
 
             <div class="news-card">
 
                 <div class="title">
+
                     🌍 ĐIỂM TIN QUỐC TẾ
+
                 </div>
 
                 <div id="international"></div>
 
             </div>
 
+            <!-- Trong nước -->
+
             <div class="news-card">
 
                 <div class="title">
+
                     🇻🇳 ĐIỂM TIN TRONG NƯỚC
+
                 </div>
 
                 <div id="domestic"></div>
 
             </div>
 
+            <!-- Doanh nghiệp -->
+
             <div class="news-card">
 
                 <div class="title">
+
                     🏢 TIN DOANH NGHIỆP
+
                 </div>
 
                 <div id="corporate"></div>
 
             </div>
 
+            <!-- Tin khác -->
+
             <div class="news-card">
 
                 <div class="title">
+
                     📌 TIN KHÁC
+
                 </div>
 
                 <div id="other"></div>
@@ -125,37 +130,81 @@
 
         </section>
 
+        <!-- RIGHT -->
+
+        <aside class="right-panel">
+
+            <div class="market-card">
+
+                <h2>
+
+                    📊 Chỉ số thị trường
+
+                </h2>
+
+                <table class="market-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Chỉ số</th>
+
+                            <th>Điểm</th>
+
+                            <th>+/-</th>
+
+                            <th>%</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="marketTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </aside>
+
     </main>
 
-    <!-- WATERMARK -->
+    <!-- ================= WATERMARK ================= -->
 
-    <div class="watermark">
+    <div class="watermark">WeHa</div>
 
-        WeHa
-
-    </div>
-
-    <!-- FOOTER -->
+    <!-- ================= FOOTER ================= -->
 
     <footer>
 
         <div class="footer-left">
 
-            <div>📧 hello@weha.com.vn</div>
+            <div>
 
-            <div>🌐 weha.com.vn</div>
+                📧 hello@weha.com.vn
+
+            </div>
+
+            <div>
+
+                🌐 weha.com.vn
+
+            </div>
 
         </div>
 
         <div class="footer-right">
 
-            <img src="assets/img/logo-cropped.png"
-                 class="qr"
-                 alt="WeHa">
+            <img src="assets/img/logo-cropped.png" class="qr" alt="WeHa">
 
         </div>
 
     </footer>
+
+    <!-- ================= EXPORT ================= -->
 
     <button id="btnExport">
 
@@ -163,7 +212,11 @@
 
     </button>
 
+    <!-- html2canvas -->
+
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+    <!-- JS -->
 
     <script src="assets/js/common.js"></script>
 
@@ -172,3 +225,5 @@
 </body>
 
 </html>
+
+sửa html trước đi
