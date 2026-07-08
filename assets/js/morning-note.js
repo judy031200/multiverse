@@ -1,62 +1,120 @@
-const API = "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnRq11S_4d67SSXCrSBaBRe3HPc30rTvuqBweHdg3PCFchOiWkDfRUyoNmhlPAZpX9MhkCEtVwIoguTiL7MBLOFqViXSpWXn5vXizhhG8l0v3rsgS3GNDHdAUfbGL9sAoxcCcUAJ9f5jUfCB2QWaOWvW3NLlCpO-u5AA6uBDEodHvchqh1567NbLeBPkA3LQi920WFTXZjMkiEkKDU20PtNvLEz7iIDP0H57wNoa9T9eytqiPBa4Bw0ITSCgbPhXCHsbA28xNlZtg_jnJBxatP2KjTYYvbOAMcP-ne2OKbXeCxIILb8&lib=MnnpPJkA_5FX3uJzldvTmeUx--YUDytHw";
+const API =
+"https://script.google.com/macros/s/AKfycbz8Q2jROUEg6PMEtpH5tyKgUZhV0mZ-hRCMknYoK2fZrqVt8ES9oVS7Y49OihjG8DwOMg/exec?sheet=morning";
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadMorning();
+});
 
 async function loadMorning() {
 
-    const res = await fetch(API);
+    try {
 
-    const data = await res.json();
+        const res = await fetch(API);
 
-    document.getElementById("today").innerHTML =
-        data.morning.today;
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+        }
 
-    document.getElementById("international").innerHTML =
-        data.morning.international;
+        const data = await res.json();
 
-    document.getElementById("domestic").innerHTML =
-        data.morning.domestic;
+        // ===== Ngày =====
+        document.getElementById("today").textContent =
+            formatDate(data.morning.today);
 
-    document.getElementById("corporate").innerHTML =
-        data.morning.corporate;
+        // ===== Morning Note =====
+        document.getElementById("international").innerHTML =
+            data.morning.international || "";
 
-    document.getElementById("other")?.innerHTML =
-        data.morning.other;
+        document.getElementById("domestic").innerHTML =
+            data.morning.domestic || "";
 
-    renderMarket(data.indexes);
+        document.getElementById("corporate").innerHTML =
+            data.morning.corporate || "";
+
+        document.getElementById("other").innerHTML =
+            data.morning.other || "";
+
+        // ===== Market =====
+        renderMarket(data.indexes || []);
+
+    } catch (err) {
+
+        console.error("Morning API Error:", err);
+
+        document.getElementById("international").innerHTML =
+            "<p>⚠️ Không tải được dữ liệu.</p>";
+
+    }
 
 }
 
-function renderMarket(list){
+function renderMarket(list) {
 
-    const tbody=document.getElementById("marketTable");
+    const tbody = document.getElementById("marketTable");
 
-    tbody.innerHTML="";
+    if (!list.length) {
 
-    list.forEach(item=>{
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4" style="text-align:center">
+                    Không có dữ liệu
+                </td>
+            </tr>
+        `;
 
-        tbody.innerHTML+=`
+        return;
+    }
+
+    tbody.innerHTML = list.map(item => {
+
+        const changeClass =
+            Number(item.netChange) >= 0 ? "up" : "down";
+
+        const pctClass =
+            Number(item.pctChange) >= 0 ? "up" : "down";
+
+        return `
+
         <tr>
 
             <td>${item.name}</td>
 
-            <td>${Number(item.indexClose).toLocaleString()}</td>
-
-            <td class="${item.netChange>=0?'up':'down'}">
-
-            ${Number(item.netChange).toFixed(2)}
-
+            <td>
+                ${Number(item.indexClose).toLocaleString("en-US",{
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                })}
             </td>
 
-            <td class="${item.pctChange>=0?'up':'down'}">
+            <td class="${changeClass}">
+                ${Number(item.netChange)>0?"+":""}
+                ${Number(item.netChange).toFixed(2)}
+            </td>
 
-            ${Number(item.pctChange).toFixed(2)}%
-
+            <td class="${pctClass}">
+                ${Number(item.pctChange)>0?"+":""}
+                ${Number(item.pctChange).toFixed(2)}%
             </td>
 
         </tr>
+
         `;
 
-    });
+    }).join("");
 
 }
 
-loadMorning();
+function formatDate(dateString){
+
+    if(!dateString) return "";
+
+    const d = new Date(dateString);
+
+    return d.toLocaleDateString("vi-VN",{
+        weekday:"long",
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+    });
+
+}
