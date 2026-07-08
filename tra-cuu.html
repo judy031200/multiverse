@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WeHa Multiverse | Tra cứu mã cổ phiếu</title>
+<meta name="description" content="Tra cứu toàn bộ báo cáo phân tích theo mã cổ phiếu, xem đồng thuận khuyến nghị và giá mục tiêu trung bình từ các CTCK.">
+<link rel="canonical" href="https://judy031200.github.io/multiverse/tra-cuu.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/img/logo-cropped.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="page">
+  <section class="brand-shell">
+    <div class="brand-nav">
+      <div class="brand-logo">
+        <img src="assets/img/logo-cropped.png" alt="WeHa">
+        <div class="brand-kicker">
+          <strong>WeHa Multiverse</strong>
+          <span>Equity research and wealth cockpit</span>
+        </div>
+      </div>
+      <div class="brand-actions">
+        <span class="brand-pill">Research Lens</span>
+        <span class="brand-pill">Lightmode</span>
+      </div>
+    </div>
+    <div class="brand-hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Stock universe</div>
+        <h1>Tra cứu mã cổ phiếu với góc nhìn toàn diện</h1>
+        <p>Nhập ticker để xem đồng thuận khuyến nghị, giá mục tiêu, lịch sử báo cáo và nguồn phân tích trong một trải nghiệm dữ liệu gọn, sáng và cao cấp.</p>
+        <div class="hero-cta">
+          <a class="primary-link" href="#panel-ticker">Bắt đầu tra cứu</a>
+          <a class="secondary-link" href="index.html">Kho báo cáo</a>
+        </div>
+      </div>
+      <div class="market-visual" aria-label="Research dashboard preview">
+        <div class="market-visual-top">
+          <div class="market-index"><strong>WEHA</strong><span>Consensus and valuation lens</span></div>
+          <div class="market-gain">Premium</div>
+        </div>
+        <div class="chart-line"></div>
+        <div class="metric-row">
+          <div class="metric"><span>Coverage</span><strong>HOSE</strong></div>
+          <div class="metric"><span>Target</span><strong>TP</strong></div>
+          <div class="metric"><span>Signal</span><strong>A+</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tabs">
+    <a class="tab-btn" href="index.html">Tất cả báo cáo</a>
+    <a class="tab-btn active" href="tra-cuu.html">Tra cứu mã</a>
+    <a class="tab-btn" href="tin-hieu.html">Tín hiệu</a>
+    <a class="tab-btn" href="su-kien.html">Sự kiện</a>
+    <a class="tab-btn" href="nhat-ky.html">Nhật ký đầu tư</a>
+    <a class="tab-btn" href="morning-note.html">Bản tin sáng</a>
+  </div>
+
+  <div class="tab-panel active" id="panel-ticker">
+    <div class="ticker-search-box">
+      <div class="ticker-input-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="ticker-input" placeholder="Nhập mã (VD: ACB)" maxlength="10" onkeydown="if(event.key==='Enter')searchTicker()" oninput="this.value=this.value.toUpperCase()">
+      </div>
+      <button class="btn-primary" onclick="searchTicker()">Tìm báo cáo</button>
+      <span class="ticker-hint" id="ticker-hint">Nhập mã và nhấn Tìm</span>
+      <div class="toolbar-spacer"></div>
+      <div class="history-wrap" id="history-wrap" style="display:none;"><span class="history-label">Gần đây:</span><div id="history-chips"></div></div>
+    </div>
+    <div id="ticker-consensus" style="display:none;">
+      <div class="consensus-bar" id="consensus-bar"></div>
+      <div class="stats-bar" id="stats-bar"></div>
+      <div class="ticker-filter-row">
+        <div class="custom-select"><select id="ticker-src-filter" onchange="filterTickerTable()"><option value="">Tất cả CTCK</option></select></div>
+        <div class="custom-select"><select id="ticker-rec-filter" onchange="filterTickerTable()"><option value="">Tất cả KN</option><option value="MUA">Mua</option><option value="KHẢ QUAN">Khả quan</option><option value="TRUNG LẬP">Trung lập</option></select></div>
+        <span class="result-count" id="ticker-result-count" style="margin:0;"></span>
+      </div>
+    </div>
+    <div class="table-wrap" id="ticker-table-wrap" style="display:none;">
+      <table><thead><tr>
+        <th class="date-cell sort-desc" onclick="toggleTickerSort()">Ngày</th>
+        <th>Tiêu đề</th><th class="source-col">CTCK</th><th class="rec-col">Khuyến nghị</th>
+        <th class="price-col" style="text-align:right">Giá MT</th><th class="dl-col">Tải</th>
+      </tr></thead>
+      <tbody id="ticker-tbody"></tbody></table>
+    </div>
+    <div class="card-list" id="ticker-card-list"></div>
+  </div>
+
+</div>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/ticker.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WeHa Multiverse | Nhật ký đầu tư cá nhân</title>
+<meta name="description" content="Nhật ký ghi chú đầu tư cá nhân: hành động mua/bán/giữ, sentiment, catalyst và rủi ro theo từng mã cổ phiếu.">
+<link rel="canonical" href="https://judy031200.github.io/multiverse/nhat-ky.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/img/logo-cropped.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="page">
+  <section class="brand-shell">
+    <div class="brand-nav">
+      <div class="brand-logo">
+        <img src="assets/img/logo-cropped.png" alt="WeHa">
+        <div class="brand-kicker">
+          <strong>WeHa Multiverse</strong>
+          <span>Personal wealth discipline notebook</span>
+        </div>
+      </div>
+      <div class="brand-actions">
+        <span class="brand-pill">Catalyst</span>
+        <span class="brand-pill">Risk Log</span>
+      </div>
+    </div>
+    <div class="brand-hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Investment journal</div>
+        <h1>Biến dữ liệu thành kỷ luật đầu tư</h1>
+        <p>Ghi lại thesis, hành động, sentiment, catalyst và rủi ro theo từng mã để mỗi quyết định trong danh mục có lý do rõ ràng.</p>
+        <div class="hero-cta">
+          <a class="primary-link" href="#panel-journal">Mở nhật ký</a>
+          <a class="secondary-link" href="tin-hieu.html">Xem tín hiệu</a>
+        </div>
+      </div>
+      <div class="market-visual" aria-label="Journal dashboard preview">
+        <div class="market-visual-top">
+          <div class="market-index"><strong>Thesis</strong><span>Decision memory system</span></div>
+          <div class="market-gain">Calm</div>
+        </div>
+        <div class="chart-line"></div>
+        <div class="metric-row">
+          <div class="metric"><span>Notes</span><strong>128</strong></div>
+          <div class="metric"><span>Bullish</span><strong>46</strong></div>
+          <div class="metric"><span>Watch</span><strong>19</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tabs">
+    <a class="tab-btn" href="index.html">Tất cả báo cáo</a>
+    <a class="tab-btn" href="tra-cuu.html">Tra cứu mã</a>
+    <a class="tab-btn" href="tin-hieu.html">Tín hiệu</a>
+    <a class="tab-btn" href="su-kien.html">Sự kiện</a>
+    <a class="tab-btn active" href="nhat-ky.html">Nhật ký đầu tư</a>
+    <a class="tab-btn" href="morning-note.html">Bản tin sáng</a>
+  </div>
+
+  <div class="tab-panel active" id="panel-journal">
+    <!-- Thanh công cụ -->
+    <div class="journal-toolbar">
+      <div class="search-wrap" style="min-width:180px;max-width:260px;flex:1;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="jnl-search" placeholder="Tìm mã, nội dung..." oninput="filterJournal()">
+      </div>
+      <div class="custom-select"><select id="jnl-action-filter" onchange="filterJournal()"><option value="">Tất cả hành động</option><option value="Buy">Mua</option><option value="Hold">Giữ</option><option value="Sell">Bán</option></select></div>
+      <div class="custom-select"><select id="jnl-sentiment-filter" onchange="filterJournal()"><option value="">Tất cả sentiment</option><option value="Bullish">Bullish</option><option value="Neutral">Neutral</option><option value="Bearish">Bearish</option></select></div>
+      <div class="custom-select"><select id="jnl-sector-filter" onchange="filterJournal()"><option value="">Tất cả ngành</option></select></div>
+      <button class="btn-primary" onclick="loadJournal()">🔄 Tải</button>
+      <span id="jnl-count-label" style="font-size:12px;color:#aaa;margin-left:auto;"></span>
+    </div>
+
+    <!-- Chip lọc nhanh theo ticker -->
+    <div id="jnl-ticker-chips" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;"></div>
+
+    <!-- Stats bar -->
+    <div class="jnl-stats" id="jnl-stats" style="display:none;">
+      <div class="jnl-stat"><div class="jnl-stat-label">Tổng ghi chú</div><div class="jnl-stat-value" id="jnl-s-total">0</div></div>
+      <div class="jnl-stat"><div class="jnl-stat-label">Bullish</div><div class="jnl-stat-value" style="color:#15803d" id="jnl-s-bull">0</div></div>
+      <div class="jnl-stat"><div class="jnl-stat-label">Hold</div><div class="jnl-stat-value" style="color:#0369a1" id="jnl-s-hold">0</div></div>
+      <div class="jnl-stat"><div class="jnl-stat-label">Mã theo dõi</div><div class="jnl-stat-value" style="color:#7c3aed" id="jnl-s-tickers">0</div></div>
+    </div>
+
+    <!-- Danh sách nhật ký -->
+    <div id="jnl-list"><div class="jnl-empty">Nhấn "Tải" để xem nhật ký đầu tư</div></div>
+  </div>
+
+</div>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/journal.js"></script>
+</body>
+</html>

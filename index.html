@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WeHa Multiverse | Báo cáo phân tích cổ phiếu</title>
+<meta name="description" content="Tổng hợp báo cáo phân tích cổ phiếu, vĩ mô, chiến lược từ các công ty chứng khoán — lọc theo loại, khuyến nghị, nguồn.">
+<link rel="canonical" href="https://judy031200.github.io/fullreport/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/img/logo-cropped.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="page">
+  <section class="brand-shell">
+    <div class="brand-nav">
+      <div class="brand-logo">
+        <img src="assets/img/logo-cropped.png" alt="WeHa">
+        <div class="brand-kicker">
+          <strong>WeHa Multiverse</strong>
+          <span>Wealth intelligence for Vietnam investors</span>
+        </div>
+      </div>
+      <div class="brand-actions">
+        <span class="brand-pill">Lightmode Terminal</span>
+        <span class="brand-pill">Premier Advisory</span>
+      </div>
+    </div>
+    <div class="brand-hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Financial universe</div>
+        <h1>Đầu tư thông minh, tài sản vững bền</h1>
+        <p>WeHa Multiverse gom báo cáo phân tích, tín hiệu giao dịch, lịch sự kiện và nhật ký đầu tư vào một không gian dữ liệu sáng, sang trọng và dễ ra quyết định.</p>
+        <div class="hero-cta">
+          <a class="primary-link" href="tra-cuu.html">Tra cứu cổ phiếu</a>
+          <a class="secondary-link" href="tin-hieu.html">Xem tín hiệu</a>
+        </div>
+      </div>
+      <div class="market-visual" aria-label="Market dashboard preview">
+        <div class="market-visual-top">
+          <div class="market-index">
+            <strong>VN-Index</strong>
+            <span>Market breadth dashboard</span>
+          </div>
+          <div class="market-gain">+1.24%</div>
+        </div>
+        <div class="chart-line"></div>
+        <div class="metric-row">
+          <div class="metric"><span>Alpha watch</span><strong>24</strong></div>
+          <div class="metric"><span>Reports</span><strong>500+</strong></div>
+          <div class="metric"><span>Risk score</span><strong>A</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tabs">
+    <a class="tab-btn active" href="index.html">Tất cả báo cáo</a>
+    <a class="tab-btn" href="tra-cuu.html">Tra cứu mã</a>
+    <a class="tab-btn" href="tin-hieu.html">Tín hiệu</a>
+    <a class="tab-btn" href="su-kien.html">Sự kiện</a>
+    <a class="tab-btn" href="nhat-ky.html">Nhật ký đầu tư</a>
+    <a class="tab-btn" href="morning-note.html">Bản tin sáng</a>
+  </div>
+
+  <section class="brand-section">
+    <article class="brand-feature"><span>01</span><h3>Báo cáo phân tích</h3><p>Tổng hợp góc nhìn từ các nguồn nghiên cứu, lọc nhanh theo mã, khuyến nghị và ngày phát hành.</p></article>
+    <article class="brand-feature"><span>02</span><h3>Tín hiệu thị trường</h3><p>Theo dõi buy, sell, pullback và DIP với bộ lọc vốn hóa, thanh khoản và chất lượng cổ phiếu.</p></article>
+    <article class="brand-feature"><span>03</span><h3>Lịch sự kiện</h3><p>Nắm cổ tức, phát hành thêm và các mốc doanh nghiệp quan trọng trong cùng một lịch dữ liệu.</p></article>
+    <article class="brand-feature"><span>04</span><h3>Nhật ký wealth</h3><p>Ghi lại luận điểm, catalyst, rủi ro và hành động để danh mục có kỷ luật hơn qua từng chu kỳ.</p></article>
+  </section>
+
+  <div class="tab-panel active" id="panel-all">
+    <div class="toolbar">
+      <div class="filter-group"><label>Loại</label><div class="custom-select"><select id="type-filter"><option value="">Tất cả</option><option value="stock">Cổ phiếu</option><option value="macro">Vĩ mô</option><option value="strategy">Chiến lược</option></select></div></div>
+      <div class="filter-group"><label>Khuyến nghị</label><div class="custom-select"><select id="rec-filter"><option value="">Tất cả KN</option><option value="MUA">Mua</option><option value="KHẢ QUAN">Khả quan</option><option value="TRUNG LẬP">Trung lập</option><option value="KHÁC">Khác</option></select></div></div>
+      <div class="filter-group"><label>Nguồn</label><div class="custom-select"><select id="source-filter"><option value="">Tất cả nguồn</option></select></div></div>
+      <button class="btn-primary" onclick="applyFilters()">Áp dụng</button>
+      <div class="toolbar-spacer"></div>
+      <div class="search-wrap-outer" style="min-width:180px;max-width:240px;flex:1;">
+        <div class="search-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="search" placeholder="Tìm mã, tiêu đề...">
+        </div>
+      </div>
+    </div>
+    <div class="result-count" id="result-count"></div>
+    <div class="table-wrap">
+      <table><thead><tr>
+        <th class="date-cell sort-desc" onclick="toggleSort()">Ngày</th>
+        <th>Tiêu đề</th><th class="ticker-col">Mã</th><th class="source-col">Nguồn</th>
+        <th class="rec-col">Khuyến nghị</th><th class="price-col" style="text-align:right">Giá MT</th><th class="dl-col">Tải</th>
+      </tr></thead>
+      <tbody id="tbody"><tr class="state-row"><td colspan="7">Đang tải...</td></tr></tbody></table>
+    </div>
+    <div class="card-list" id="card-list"></div>
+  </div>
+
+</div>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/all.js"></script>
+</body>
+</html>
