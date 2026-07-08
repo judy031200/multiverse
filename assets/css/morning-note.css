@@ -1,0 +1,57 @@
+/* ============================================================
+   WeHa Lens · Morning Brief — page-specific styles
+   Builds on tokens defined in style.css
+   ============================================================ */
+body.mn-body{background:var(--ivory)}
+
+.mn-header{max-width:1180px;margin:0 auto;padding:26px 16px 6px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.mn-header-left{display:flex;align-items:center;gap:12px}
+.mn-header-left img{height:44px;width:auto}
+.mn-header-right{flex:1;min-width:220px}
+.mn-header-right h1{font-family:var(--font-display);font-size:26px;font-weight:800;color:var(--navy);letter-spacing:-.01em}
+.mn-sub-title{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-top:3px}
+.mn-today{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
+.mn-hero-rule{max-width:1180px;margin:16px auto 22px;padding:0 16px}
+.mn-hero-rule::after{content:"";display:block;height:1px;background:linear-gradient(90deg,var(--gold) 0%,var(--hairline) 45%,var(--hairline) 100%)}
+
+.mn-wrapper{max-width:1180px;margin:0 auto;padding:0 16px 40px;display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
+
+.mn-news-card{background:var(--paper);border:1px solid var(--hairline);border-radius:var(--radius);padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow-sm)}
+.mn-news-card .mn-title{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px;letter-spacing:-.005em}
+.mn-news-card .mn-title::after{content:"";flex:1;height:1px;background:var(--hairline-2)}
+.mn-news-card ul{padding-left:18px}
+.mn-news-card li{font-size:13px;line-height:1.75;color:var(--ink);margin-bottom:6px}
+.mn-news-card p{font-size:13px;line-height:1.75;color:var(--ink);margin-bottom:8px}
+.mn-news-card p:last-child{margin-bottom:0}
+.mn-empty{color:var(--ink-faint);font-style:italic;font-size:13px}
+
+.mn-market-card{background:var(--navy);color:#fdfbf5;border-radius:var(--radius);padding:18px 18px 6px;box-shadow:var(--shadow-md);position:sticky;top:88px}
+.mn-market-card h2{font-family:var(--font-display);font-size:15px;font-weight:700;margin-bottom:12px;letter-spacing:-.005em;color:#fdfbf5}
+.mn-market-table{width:100%;border-collapse:collapse}
+.mn-market-table thead th{font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:rgba(253,251,245,.55);text-align:left;padding:6px 4px;border-bottom:1px solid rgba(253,251,245,.15);font-weight:700}
+.mn-market-table thead th:not(:first-child){text-align:right}
+.mn-market-table tbody td{padding:9px 4px;font-size:12.5px;border-bottom:1px solid rgba(253,251,245,.08);font-variant-numeric:tabular-nums}
+.mn-market-table tbody tr:last-child td{border-bottom:none}
+.mn-idx-name{font-weight:700;color:#fdfbf5}
+.mn-idx-close{text-align:right;font-weight:600;color:#fdfbf5}
+.mn-market-table td.up{color:#7fe0ab;text-align:right;font-weight:700}
+.mn-market-table td.down{color:#f2a8a2;text-align:right;font-weight:700}
+
+.mn-footer{max-width:1180px;margin:0 auto;padding:18px 16px 36px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--hairline);font-size:12px;color:var(--ink-faint)}
+.mn-footer a{color:var(--ink-soft);text-decoration:none}
+.mn-footer a:hover{color:var(--gold-deep)}
+
+#mn-export{position:fixed;right:18px;bottom:18px;background:var(--navy);color:#fdfbf5;border:none;border-radius:30px;padding:12px 20px;font-size:13px;font-weight:700;font-family:var(--font-body);cursor:pointer;box-shadow:var(--shadow-md);z-index:50;transition:background .15s,transform .15s}
+#mn-export:hover{background:var(--navy-2);transform:translateY(-1px)}
+
+@media(max-width:900px){
+  .mn-wrapper{grid-template-columns:1fr}
+  .mn-market-card{position:static}
+}
+@media(max-width:640px){
+  .mn-header{padding:18px 12px 4px}
+  .mn-header-right h1{font-size:21px}
+  .mn-wrapper{padding:0 12px 32px;gap:14px}
+  .mn-news-card{padding:14px 15px}
+  #mn-export{right:12px;bottom:12px;padding:10px 16px;font-size:12px}
+}
