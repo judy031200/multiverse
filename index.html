@@ -1,56 +1,226 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tất cả báo cáo phân tích cổ phiếu | Báo Cáo & Cổ Phiếu</title>
-<meta name="description" content="Tổng hợp báo cáo phân tích cổ phiếu, vĩ mô, chiến lược từ các công ty chứng khoán — lọc theo loại, khuyến nghị, nguồn.">
-<link rel="canonical" href="https://judy031200.github.io/fullreport/index.html">
+
+<title>Tất cả báo cáo phân tích cổ phiếu </title>
+
+<meta name="description"
+content="Tổng hợp báo cáo phân tích cổ phiếu, vĩ mô, chiến lược từ các công ty chứng khoán.">
+
+<link rel="canonical"
+href="https://judy031200.github.io/fullreport/index.html">
+
+<link rel="stylesheet" href="assets/css/layout.css">
 <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
+
 <body>
+
+<!-- Header dùng chung -->
+<div id="app-header"></div>
+
 <div class="page">
-  <div class="page-title">📊 Báo Cáo & Cổ Phiếu</div>
-  <div class="page-subtitle">Báo cáo phân tích · Tra cứu mã · Tín hiệu · Sự kiện · Nhật ký đầu tư</div>
 
-  <div class="tabs">
-    <a class="tab-btn active" href="index.html">🗂 Tất cả báo cáo</a>
-    <a class="tab-btn" href="tra-cuu.html">🔍 Tra cứu mã</a>
-    <a class="tab-btn" href="tin-hieu.html">⚡ Tín hiệu</a>
-    <a class="tab-btn" href="su-kien.html">📅 Sự kiện</a>
-    <a class="tab-btn" href="nhat-ky.html">📓 Nhật ký đầu tư</a>
-    <a class="tab-btn" href="morning-note.html">Bản tin sáng</a>
-    <a class="tab-btn" href="portfolio.html">Danh Mục Đầu Tư</a>
-  </div>
+    <div class="tab-panel active" id="panel-all">
 
-  <div class="tab-panel active" id="panel-all">
-    <div class="toolbar">
-      <div class="filter-group"><label>Loại</label><div class="custom-select"><select id="type-filter"><option value="">Tất cả</option><option value="stock">Cổ phiếu</option><option value="macro">Vĩ mô</option><option value="strategy">Chiến lược</option></select></div></div>
-      <div class="filter-group"><label>Khuyến nghị</label><div class="custom-select"><select id="rec-filter"><option value="">Tất cả KN</option><option value="MUA">Mua</option><option value="KHẢ QUAN">Khả quan</option><option value="TRUNG LẬP">Trung lập</option><option value="KHÁC">Khác</option></select></div></div>
-      <div class="filter-group"><label>Nguồn</label><div class="custom-select"><select id="source-filter"><option value="">Tất cả nguồn</option></select></div></div>
-      <button class="btn-primary" onclick="applyFilters()">Áp dụng</button>
-      <div class="toolbar-spacer"></div>
-      <div class="search-wrap-outer" style="min-width:180px;max-width:240px;flex:1;">
-        <div class="search-wrap">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input type="text" id="search" placeholder="Tìm mã, tiêu đề...">
+        <div class="toolbar">
+
+            <div class="filter-group">
+
+                <label>Loại</label>
+
+                <div class="custom-select">
+
+                    <select id="type-filter">
+
+                        <option value="">Tất cả</option>
+                        <option value="stock">Cổ phiếu</option>
+                        <option value="macro">Vĩ mô</option>
+                        <option value="strategy">Chiến lược</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="filter-group">
+
+                <label>Khuyến nghị</label>
+
+                <div class="custom-select">
+
+                    <select id="rec-filter">
+
+                        <option value="">Tất cả KN</option>
+                        <option value="MUA">Mua</option>
+                        <option value="KHẢ QUAN">Khả quan</option>
+                        <option value="TRUNG LẬP">Trung lập</option>
+                        <option value="KHÁC">Khác</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="filter-group">
+
+                <label>Nguồn</label>
+
+                <div class="custom-select">
+
+                    <select id="source-filter">
+
+                        <option value="">Tất cả nguồn</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button
+                class="btn-primary"
+                onclick="applyFilters()">
+
+                Áp dụng
+
+            </button>
+
+            <div class="toolbar-spacer"></div>
+
+            <div
+                class="search-wrap-outer"
+                style="min-width:180px;max-width:240px;flex:1;">
+
+                <div class="search-wrap">
+
+                    <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2">
+
+                        <circle cx="11" cy="11" r="8"/>
+
+                        <path d="m21 21-4.35-4.35"/>
+
+                    </svg>
+
+                    <input
+                        type="text"
+                        id="search"
+                        placeholder="Tìm mã, tiêu đề..."
+                    >
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
+
+        <div
+            class="result-count"
+            id="result-count">
+
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th
+                            class="date-cell sort-desc"
+                            onclick="toggleSort()">
+
+                            Ngày
+
+                        </th>
+
+                        <th>Tiêu đề</th>
+
+                        <th class="ticker-col">
+
+                            Mã
+
+                        </th>
+
+                        <th class="source-col">
+
+                            Nguồn
+
+                        </th>
+
+                        <th class="rec-col">
+
+                            Khuyến nghị
+
+                        </th>
+
+                        <th
+                            class="price-col"
+                            style="text-align:right">
+
+                            Giá MT
+
+                        </th>
+
+                        <th class="dl-col">
+
+                            Tải
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tbody">
+
+                    <tr class="state-row">
+
+                        <td colspan="7">
+
+                            Đang tải...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div
+            class="card-list"
+            id="card-list">
+
+        </div>
+
     </div>
-    <div class="result-count" id="result-count"></div>
-    <div class="table-wrap">
-      <table><thead><tr>
-        <th class="date-cell sort-desc" onclick="toggleSort()">Ngày</th>
-        <th>Tiêu đề</th><th class="ticker-col">Mã</th><th class="source-col">Nguồn</th>
-        <th class="rec-col">Khuyến nghị</th><th class="price-col" style="text-align:right">Giá MT</th><th class="dl-col">Tải</th>
-      </tr></thead>
-      <tbody id="tbody"><tr class="state-row"><td colspan="7">Đang tải...</td></tr></tbody></table>
-    </div>
-    <div class="card-list" id="card-list"></div>
-  </div>
 
 </div>
+
+<!-- Footer dùng chung -->
+<div id="app-footer"></div>
+
+<script src="assets/js/layout.js"></script>
 <script src="assets/js/common.js"></script>
 <script src="assets/js/all.js"></script>
+
 </body>
+
 </html>
