@@ -1,1 +1,806 @@
+/* ===========================================
+   WeHa Lens - Portfolio
+=========================================== */
 
+:root{
+
+    --primary:#C99A2E;
+    --primary-dark:#A97E23;
+
+    --green:#16a34a;
+    --red:#dc2626;
+
+    --text:#222;
+    --text-light:#666;
+
+    --border:#e5e7eb;
+
+    --bg:#f5f7fb;
+
+    --card:#ffffff;
+
+    --shadow:0 8px 25px rgba(0,0,0,.08);
+
+    --radius:16px;
+
+}
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+body{
+
+    font-family:"Be Vietnam Pro",sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    line-height:1.6;
+
+}
+
+
+/* ===========================================
+    HEADER
+=========================================== */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px 40px;
+
+    background:linear-gradient(90deg,#c69c35,#e7c86a);
+
+    color:#fff;
+
+    box-shadow:var(--shadow);
+
+}
+
+.topbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.logo{
+
+    width:64px;
+
+    height:64px;
+
+    object-fit:contain;
+
+}
+
+.topbar h1{
+
+    font-size:30px;
+
+    font-weight:800;
+
+}
+
+.topbar p{
+
+    margin-top:3px;
+
+    font-size:15px;
+
+    opacity:.9;
+
+}
+
+#today{
+
+    font-size:16px;
+
+    font-weight:600;
+
+}
+
+
+/* ===========================================
+    SUMMARY
+=========================================== */
+
+.summary{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+    padding:30px 40px;
+
+}
+
+.summary-card{
+
+    background:#fff;
+
+    border-radius:16px;
+
+    padding:24px;
+
+    box-shadow:var(--shadow);
+
+    transition:.25s;
+
+}
+
+.summary-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.summary-card span{
+
+    display:block;
+
+    color:#888;
+
+    font-size:14px;
+
+}
+
+.summary-card h2{
+
+    margin-top:12px;
+
+    font-size:34px;
+
+    font-weight:800;
+
+}
+
+
+/* ===========================================
+    TOOLBAR
+=========================================== */
+
+.toolbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 40px 25px;
+
+}
+
+.toolbar-left{
+
+    flex:1;
+
+}
+
+.toolbar-right{
+
+    margin-left:20px;
+
+}
+
+#searchInput{
+
+    width:100%;
+
+    max-width:420px;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.2s;
+
+}
+
+#searchInput:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(201,154,46,.15);
+
+}
+
+#signalFilter{
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    outline:none;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    background:#fff;
+
+}
+
+
+/* ===========================================
+    TABLE WRAPPER
+=========================================== */
+
+.table-wrapper{
+
+    padding:0 40px 40px;
+
+}
+
+/* ===========================================
+    TABLE
+=========================================== */
+
+.portfolio-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:#fff;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+}
+
+.portfolio-table thead{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:20;
+
+}
+
+.portfolio-table thead tr{
+
+    background:linear-gradient(90deg,#183b78,#254d95);
+
+}
+
+.portfolio-table th{
+
+    color:#fff;
+
+    padding:16px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+}
+
+.portfolio-table td{
+
+    padding:15px 14px;
+
+    border-bottom:1px solid #edf0f4;
+
+    text-align:center;
+
+    font-size:14px;
+
+}
+
+.portfolio-table tbody tr{
+
+    transition:.2s;
+
+}
+
+.portfolio-table tbody tr:nth-child(even){
+
+    background:#fbfcfd;
+
+}
+
+.portfolio-table tbody tr:hover{
+
+    background:#eef6ff;
+
+    transform:scale(1.002);
+
+}
+
+
+/* ===========================================
+    FIRST COLUMN
+=========================================== */
+
+.portfolio-table td:first-child{
+
+    font-size:16px;
+
+    font-weight:800;
+
+    color:#183b78;
+
+}
+
+
+/* ===========================================
+    SIGNAL BADGE
+=========================================== */
+
+.badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+.badge-buy{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+.badge-dip{
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+}
+
+.badge-pullback{
+
+    background:#fef3c7;
+
+    color:#b45309;
+
+}
+
+.badge-watch{
+
+    background:#ede9fe;
+
+    color:#6d28d9;
+
+}
+
+.badge-sell{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+
+/* ===========================================
+    P/L
+=========================================== */
+
+.up{
+
+    color:#16a34a;
+
+    font-weight:800;
+
+}
+
+.down{
+
+    color:#dc2626;
+
+    font-weight:800;
+
+}
+
+.flat{
+
+    color:#777;
+
+}
+
+
+/* ===========================================
+    BUY ZONE
+=========================================== */
+
+.buy-zone{
+
+    font-weight:600;
+
+    color:#183b78;
+
+    white-space:nowrap;
+
+}
+
+
+/* ===========================================
+    HOLDING
+=========================================== */
+
+.holding{
+
+    font-weight:700;
+
+}
+
+.holding-short{
+
+    color:#16a34a;
+
+}
+
+.holding-mid{
+
+    color:#f59e0b;
+
+}
+
+.holding-long{
+
+    color:#dc2626;
+
+}
+
+
+/* ===========================================
+    SOURCE
+=========================================== */
+
+.source{
+
+    color:#666;
+
+    font-size:13px;
+
+}
+
+
+/* ===========================================
+    PRICE
+=========================================== */
+
+.price{
+
+    font-weight:700;
+
+    font-variant-numeric:tabular-nums;
+
+}
+
+.market-price{
+
+    color:#0f172a;
+
+}
+
+
+/* ===========================================
+    ROW ANIMATION
+=========================================== */
+
+@keyframes fadeRow{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.portfolio-table tbody tr{
+
+    animation:fadeRow .35s ease;
+
+}
+/* ===========================================
+    LOADING
+=========================================== */
+
+.loading{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:140px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:#666;
+
+}
+
+
+/* ===========================================
+    EMPTY STATE
+=========================================== */
+
+.empty-state{
+
+    text-align:center;
+
+    padding:80px 20px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.empty-state img{
+
+    width:180px;
+
+    margin-bottom:20px;
+
+}
+
+.empty-state h3{
+
+    font-size:24px;
+
+    margin-bottom:10px;
+
+}
+
+.empty-state p{
+
+    color:#777;
+
+}
+
+
+/* ===========================================
+    FOOTER
+=========================================== */
+
+footer{
+
+    margin-top:50px;
+
+    padding:25px 40px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    color:#666;
+
+    font-size:14px;
+
+}
+
+
+/* ===========================================
+    SCROLLBAR
+=========================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f1f1f1;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#c9c9c9;
+
+    border-radius:999px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#999;
+
+}
+
+
+/* ===========================================
+    RESPONSIVE
+=========================================== */
+
+@media (max-width:1200px){
+
+.summary{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+
+@media (max-width:900px){
+
+.topbar{
+
+    flex-direction:column;
+
+    gap:18px;
+
+    text-align:center;
+
+}
+
+.toolbar{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.toolbar-right{
+
+    margin-left:0;
+
+    width:100%;
+
+}
+
+#signalFilter{
+
+    width:100%;
+
+}
+
+.table-wrapper{
+
+    overflow:auto;
+
+}
+
+.portfolio-table{
+
+    min-width:1050px;
+
+}
+
+}
+
+
+@media (max-width:640px){
+
+.summary{
+
+    grid-template-columns:1fr;
+
+}
+
+.topbar{
+
+    padding:20px;
+
+}
+
+.summary{
+
+    padding:20px;
+
+}
+
+.toolbar{
+
+    padding:0 20px 20px;
+
+}
+
+.table-wrapper{
+
+    padding:0 20px 30px;
+
+}
+
+.logo{
+
+    width:52px;
+
+    height:52px;
+
+}
+
+.topbar h1{
+
+    font-size:24px;
+
+}
+
+.summary-card h2{
+
+    font-size:28px;
+
+}
+
+}
+
+
+/* ===========================================
+    TRANSITION
+=========================================== */
+
+button,
+input,
+select,
+.summary-card,
+.portfolio-table tbody tr{
+
+    transition:all .25s ease;
+
+}
