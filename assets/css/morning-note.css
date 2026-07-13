@@ -1,57 +1,200 @@
 /* ============================================================
-   WeHa Lens · Morning Brief — page-specific styles
-   Builds on tokens defined in style.css
+   WeHa Lens · Bản tin sáng — page-specific styles
+   Dùng chung token màu với style.css (--weha-*)
    ============================================================ */
-body.mn-body{background:var(--ivory)}
 
-.mn-header{max-width:1180px;margin:0 auto;padding:26px 16px 6px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.mn-header-left{display:flex;align-items:center;gap:12px}
-.mn-header-left img{height:44px;width:auto}
-.mn-header-right{flex:1;min-width:220px}
-.mn-header-right h1{font-family:var(--font-display);font-size:26px;font-weight:800;color:var(--navy);letter-spacing:-.01em}
-.mn-sub-title{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-top:3px}
-.mn-today{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
-.mn-hero-rule{max-width:1180px;margin:16px auto 22px;padding:0 16px}
-.mn-hero-rule::after{content:"";display:block;height:1px;background:linear-gradient(90deg,var(--gold) 0%,var(--hairline) 45%,var(--hairline) 100%)}
+body.morning-page{
+  background:linear-gradient(180deg,#faf8f2 0%,#f5f2e9 60%,#f0ede2 100%);
+}
 
-.mn-wrapper{max-width:1180px;margin:0 auto;padding:0 16px 40px;display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
+/* Trang bản tin sáng không cần hero quảng bá — chỉ hiện tabs + nội dung */
+.morning-page .brand-shell{display:none}
+.morning-page .tabs{margin-top:0}
 
-.mn-news-card{background:var(--paper);border:1px solid var(--hairline);border-radius:var(--radius);padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow-sm)}
-.mn-news-card .mn-title{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px;letter-spacing:-.005em}
-.mn-news-card .mn-title::after{content:"";flex:1;height:1px;background:var(--hairline-2)}
-.mn-news-card ul{padding-left:18px}
-.mn-news-card li{font-size:13px;line-height:1.75;color:var(--ink);margin-bottom:6px}
-.mn-news-card p{font-size:13px;line-height:1.75;color:var(--ink);margin-bottom:8px}
-.mn-news-card p:last-child{margin-bottom:0}
-.mn-empty{color:var(--ink-faint);font-style:italic;font-size:13px}
+/* ===== Toolbar tiêu đề + chọn ngày ===== */
+.mn-toolbar{
+  background:#fff;
+  border:1px solid var(--weha-line);
+  border-radius:10px;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+  box-shadow:0 12px 30px rgba(15,35,67,.045);
+}
+.mn-heading{flex:1;min-width:200px}
+.mn-heading h1{font-size:17px;font-weight:800;color:var(--weha-navy);letter-spacing:-.01em;margin-bottom:2px}
+.mn-today{font-size:12.5px;color:var(--weha-muted);text-transform:capitalize}
 
-.mn-market-card{background:var(--navy);color:#fdfbf5;border-radius:var(--radius);padding:18px 18px 6px;box-shadow:var(--shadow-md);position:sticky;top:88px}
-.mn-market-card h2{font-family:var(--font-display);font-size:15px;font-weight:700;margin-bottom:12px;letter-spacing:-.005em;color:#fdfbf5}
-.mn-market-table{width:100%;border-collapse:collapse}
-.mn-market-table thead th{font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:rgba(253,251,245,.55);text-align:left;padding:6px 4px;border-bottom:1px solid rgba(253,251,245,.15);font-weight:700}
-.mn-market-table thead th:not(:first-child){text-align:right}
-.mn-market-table tbody td{padding:9px 4px;font-size:12.5px;border-bottom:1px solid rgba(253,251,245,.08);font-variant-numeric:tabular-nums}
-.mn-market-table tbody tr:last-child td{border-bottom:none}
-.mn-idx-name{font-weight:700;color:#fdfbf5}
-.mn-idx-close{text-align:right;font-weight:600;color:#fdfbf5}
-.mn-market-table td.up{color:#7fe0ab;text-align:right;font-weight:700}
-.mn-market-table td.down{color:#f2a8a2;text-align:right;font-weight:700}
+.date-toolbar{display:flex;align-items:center;gap:8px}
+.date-toolbar label{font-size:12.5px;color:var(--weha-muted);font-weight:600;white-space:nowrap}
+.date-toolbar input[type="date"]{
+  border:1px solid var(--weha-line);
+  border-radius:6px;
+  padding:7px 10px;
+  font-size:12.5px;
+  font-family:inherit;
+  color:var(--weha-ink);
+  background:#fbfcfe;
+  cursor:pointer;
+  outline:none;
+}
+.date-toolbar input[type="date"]:focus{border-color:var(--weha-blue);box-shadow:0 0 0 3px rgba(13,79,159,.09)}
 
-.mn-footer{max-width:1180px;margin:0 auto;padding:18px 16px 36px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--hairline);font-size:12px;color:var(--ink-faint)}
-.mn-footer a{color:var(--ink-soft);text-decoration:none}
-.mn-footer a:hover{color:var(--gold-deep)}
+/* ===== Khối gói gọn để xuất ảnh (giữa toolbar và footer) ===== */
+#mn-capture{position:relative;overflow:hidden;border-radius:10px}
 
-#mn-export{position:fixed;right:18px;bottom:18px;background:var(--navy);color:#fdfbf5;border:none;border-radius:30px;padding:12px 20px;font-size:13px;font-weight:700;font-family:var(--font-body);cursor:pointer;box-shadow:var(--shadow-md);z-index:50;transition:background .15s,transform .15s}
-#mn-export:hover{background:var(--navy-2);transform:translateY(-1px)}
+/* ===== Layout 2 cột: tin tức trái / chỉ số phải ===== */
+.wrapper{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:20px;
+  align-items:start;
+  padding:0 !important;
+}
+.left-panel{display:flex;flex-direction:column;gap:16px;min-width:0}
+.right-panel{min-width:0}
 
+/* ===== Thẻ tin tức ===== */
+.news-card{
+  background:#fff;
+  border:1px solid var(--weha-line);
+  border-radius:10px;
+  padding:18px 20px;
+  box-shadow:0 12px 30px rgba(15,35,67,.045);
+}
+.news-card .title{
+  font-size:15px;
+  font-weight:700;
+  color:var(--weha-navy);
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  letter-spacing:-.005em;
+}
+.news-card .title::after{content:"";flex:1;height:1px;background:var(--weha-line)}
+.news-card ul{padding-left:18px}
+.news-card li{font-size:13px;line-height:1.75;color:#333;margin-bottom:6px}
+.news-card li b,.news-card li strong{color:var(--weha-navy)}
+.news-card li em,.news-card li i{color:var(--weha-muted)}
+.news-card p{font-size:13px;line-height:1.75;color:#333;margin-bottom:8px}
+.news-card p:last-child{margin-bottom:0}
+.mn-empty{color:#98a2b3;font-style:italic;font-size:13px}
+.mn-error{color:var(--weha-red);font-size:13px}
+
+/* ===== Bảng chỉ số thị trường (sidebar tối) ===== */
+.market-card{
+  background:var(--weha-navy);
+  color:#fdfbf5;
+  border-radius:10px;
+  padding:18px 18px 6px;
+  box-shadow:0 18px 40px rgba(8,47,102,.24);
+  position:sticky;
+  top:78px;
+}
+.market-card h2{font-size:15px;font-weight:700;margin-bottom:12px;letter-spacing:-.005em;color:#fdfbf5}
+
+.market-table-scroll{max-height:74vh;overflow-y:auto}
+.market-table-scroll::-webkit-scrollbar{width:6px}
+.market-table-scroll::-webkit-scrollbar-thumb{background:rgba(253,251,245,.25);border-radius:999px}
+
+.market-table{width:100%;border-collapse:separate;border-spacing:0}
+.market-table thead th{
+  position:sticky;top:0;
+  background:var(--weha-navy);
+  font-size:9.5px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:rgba(253,251,245,.55);
+  text-align:left;
+  padding:6px 4px 8px;
+  border-bottom:1px solid rgba(253,251,245,.15);
+  font-weight:700;
+}
+.market-table thead th:not(:first-child){text-align:right}
+.market-table tbody td{
+  padding:9px 4px;
+  font-size:12.5px;
+  border-bottom:1px solid rgba(253,251,245,.08);
+  font-variant-numeric:tabular-nums;
+  color:#fdfbf5;
+}
+.market-table tbody tr:last-child td{border-bottom:none}
+.market-table tbody td:first-child{font-weight:700}
+.market-table td.up{color:#7fe0ab;text-align:right;font-weight:700}
+.market-table td.down{color:#f2a8a2;text-align:right;font-weight:700}
+
+/* ===== Watermark ===== */
+.watermark{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-24deg);
+  font-size:min(14vw,140px);
+  font-weight:800;
+  color:rgba(8,47,102,.035);
+  letter-spacing:.02em;
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+}
+
+/* ===== Footer ===== */
+#mn-capture footer{
+  position:relative;
+  z-index:1;
+  max-width:100%;
+  margin:24px 0 0;
+  padding:16px 20px 4px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  border-top:1px solid var(--weha-line);
+  font-size:12px;
+  color:var(--weha-muted);
+}
+.footer-left div{margin-bottom:2px}
+.footer-right{display:flex;align-items:center}
+.footer-right .qr{width:34px;height:34px;object-fit:contain;border-radius:6px;mix-blend-mode:multiply}
+
+#panel-morning{position:relative;z-index:1}
+
+/* ===== Nút xuất PNG ===== */
+#btnExport{
+  position:fixed;
+  right:18px;bottom:18px;
+  background:var(--weha-navy);
+  color:#fdfbf5;
+  border:none;
+  border-radius:30px;
+  padding:12px 20px;
+  font-size:13px;
+  font-weight:700;
+  font-family:inherit;
+  cursor:pointer;
+  box-shadow:0 14px 30px rgba(8,47,102,.28);
+  z-index:50;
+  transition:background .15s,transform .15s,opacity .15s;
+}
+#btnExport:hover{background:#0b3f86;transform:translateY(-1px)}
+#btnExport:disabled{opacity:.65;cursor:wait;transform:none}
+
+/* ===== Responsive ===== */
 @media(max-width:900px){
-  .mn-wrapper{grid-template-columns:1fr}
-  .mn-market-card{position:static}
+  .wrapper{grid-template-columns:1fr}
+  .market-card{position:static}
+  .market-table-scroll{max-height:none}
 }
 @media(max-width:640px){
-  .mn-header{padding:18px 12px 4px}
-  .mn-header-right h1{font-size:21px}
-  .mn-wrapper{padding:0 12px 32px;gap:14px}
-  .mn-news-card{padding:14px 15px}
-  #mn-export{right:12px;bottom:12px;padding:10px 16px;font-size:12px}
+  .mn-toolbar{padding:12px 14px}
+  .mn-heading h1{font-size:15px}
+  .news-card{padding:14px 15px}
+  #mn-capture footer{padding:14px 16px 4px}
+  #btnExport{right:12px;bottom:12px;padding:10px 16px;font-size:12px}
+  .watermark{font-size:22vw}
 }
