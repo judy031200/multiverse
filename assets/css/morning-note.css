@@ -88,8 +88,8 @@ body.morning-page{
 /* ===== Layout 2 cột: tin tức trái / chỉ số phải ===== */
 .wrapper{
   display:grid;
-  grid-template-columns:1fr 550px;
-  gap:20px;
+  grid-template-columns:1fr 500px;
+  gap:15px;
   align-items:start;
   padding:0 !important;
 }
