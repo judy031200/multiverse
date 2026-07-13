@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/img/logo-cropped.png">
 <link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/morning-note.css?v=2">
+<link rel="stylesheet" href="assets/css/morning-note.css?v=3">
 </head>
 <body class="morning-page">
 <div class="page">
@@ -70,13 +70,27 @@
       <h1>Bản tin hôm nay</h1>
       <div id="today" class="mn-today"></div>
     </div>
-    <div class="date-toolbar">
-      <label for="noteDate">📅 Chọn ngày:</label>
-      <input type="date" id="noteDate">
+    <div class="mn-toolbar-actions">
+      <div class="date-toolbar">
+        <label for="noteDate">📅 Chọn ngày:</label>
+        <input type="date" id="noteDate">
+      </div>
+      <button id="btnEditMode" class="mn-edit-btn" type="button">✏️ Chỉnh sửa tin</button>
     </div>
   </div>
 
   <div id="mn-capture">
+    <div class="mn-brand-header">
+      <div class="mn-brand-left">
+        <img src="assets/img/logo-cropped.png" alt="WeHa" class="mn-brand-logo">
+        <div class="mn-brand-title">
+          <strong>WeHa Lens</strong>
+          <span>Bản tin thị trường mỗi sáng</span>
+        </div>
+      </div>
+      <div class="mn-brand-date" id="brandDate">Phiên giao dịch ngày: --/--/----</div>
+    </div>
+
     <div id="panel-morning">
       <main class="wrapper">
 
@@ -104,6 +118,12 @@
             <h2>📊 Chỉ số thị trường</h2>
             <div class="market-table-scroll">
               <table class="market-table">
+                <colgroup>
+                  <col class="mn-col-name">
+                  <col class="mn-col-close">
+                  <col class="mn-col-chg">
+                  <col class="mn-col-pct">
+                </colgroup>
                 <thead><tr><th>Chỉ số</th><th>Điểm</th><th>+/-</th><th>%</th></tr></thead>
                 <tbody id="marketTable"><tr><td colspan="4" style="text-align:center;color:rgba(253,251,245,.6);padding:16px;">Đang tải...</td></tr></tbody>
               </table>
@@ -132,6 +152,6 @@
 <button id="btnExport">📸 Xuất PNG</button>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="assets/js/morning-note.js?v=2"></script>
+<script src="assets/js/morning-note.js?v=3"></script>
 </body>
 </html>
