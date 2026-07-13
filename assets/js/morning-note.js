@@ -137,39 +137,55 @@ function renderMarket(list) {
 
 }
 
+// Lấy đúng phần yyyy-MM-dd từ chuỗi ngày trả về (tránh lệch ngày do timezone)
+function extractYMD(dateString){
+
+    if(!dateString) return null;
+
+    const s = String(dateString).trim();
+
+    // Dạng ISO: 2026-07-06T17:00:00.000Z hoặc 2026-07-06
+    let m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (m) return { y:+m[1], m:+m[2], d:+m[3] };
+
+    // Dạng dd/mm/yyyy
+    m = s.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+    if (m) return { y:+m[3], m:+m[2], d:+m[1] };
+
+    // Fallback: để Date tự parse (có thể lệch timezone nhưng còn hơn không)
+    const d = new Date(s);
+    if (isNaN(d.getTime())) return null;
+    return { y:d.getFullYear(), m:d.getMonth()+1, d:d.getDate() };
+
+}
+
+const WEEKDAYS_VI = ["Chủ nhật","Thứ hai","Thứ ba","Thứ tư","Thứ năm","Thứ sáu","Thứ bảy"];
+
 function formatDate(dateString){
 
-    if(!dateString) return "";
+    const ymd = extractYMD(dateString);
+    if (!ymd) return "";
 
-    const d = new Date(dateString);
+    const dObj = new Date(ymd.y, ymd.m - 1, ymd.d);
+    const weekday = WEEKDAYS_VI[dObj.getDay()];
 
-    if (isNaN(d.getTime())) return "";
+    const dd = String(ymd.d).padStart(2,"0");
+    const mm = String(ymd.m).padStart(2,"0");
 
-    return d.toLocaleDateString("vi-VN",{
-        weekday:"long",
-        day:"2-digit",
-        month:"2-digit",
-        year:"numeric"
-    });
+    return `${weekday}, ${dd}/${mm}/${ymd.y}`;
 
 }
 
 // Chuyển sang yyyy-MM-dd để input date hiểu
 function formatInputDate(dateString){
 
-    if(!dateString) return "";
+    const ymd = extractYMD(dateString);
+    if (!ymd) return "";
 
-    const d = new Date(dateString);
+    const mm = String(ymd.m).padStart(2,"0");
+    const dd = String(ymd.d).padStart(2,"0");
 
-    if (isNaN(d.getTime())) return "";
-
-    const yyyy = d.getFullYear();
-
-    const mm = String(d.getMonth()+1).padStart(2,"0");
-
-    const dd = String(d.getDate()).padStart(2,"0");
-
-    return `${yyyy}-${mm}-${dd}`;
+    return `${ymd.y}-${mm}-${dd}`;
 
 }
 
@@ -197,7 +213,7 @@ async function exportPNG(){
         });
 
         const dateVal = document.getElementById("noteDate").value ||
-            formatInputDate(new Date());
+            formatInputDate(new Date().toISOString());
 
         const link = document.createElement("a");
         link.download = `ban-tin-sang-${dateVal || "weha"}.png`;
