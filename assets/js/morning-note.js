@@ -1,6 +1,9 @@
 const API =
 "https://script.google.com/macros/s/AKfycbz8Q2jROUEg6PMEtpH5tyKgUZhV0mZ-hRCMknYoK2fZrqVt8ES9oVS7Y49OihjG8DwOMg/exec?sheet=morning";
 
+let mnHiddenSet = new Set();   // các mục tin đang bị ẩn (theo hash nội dung) của ngày hiện tại
+let mnCurrentDateKey = "default";
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // Load ngày mới nhất
@@ -15,6 +18,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const exportBtn = document.getElementById("btnExport");
     if (exportBtn) {
         exportBtn.addEventListener("click", exportPNG);
+    }
+
+    // Bật/tắt chế độ chỉnh sửa (tick chọn tin cần/không cần)
+    const editBtn = document.getElementById("btnEditMode");
+    if (editBtn) {
+        editBtn.addEventListener("click", () => {
+            const capture = document.getElementById("mn-capture");
+            const editing = capture.classList.toggle("mn-editing");
+            editBtn.classList.toggle("active", editing);
+            editBtn.textContent = editing ? "✅ Xong" : "✏️ Chỉnh sửa tin";
+        });
     }
 
 });
@@ -43,8 +57,23 @@ async function loadMorning(date = "") {
 
         // ===== Hiển thị ngày =====
 
+        const ymd = extractYMD(data.morning.today);
+
+        mnCurrentDateKey = ymd
+            ? `${ymd.y}-${String(ymd.m).padStart(2,"0")}-${String(ymd.d).padStart(2,"0")}`
+            : (date || "default");
+
+        mnHiddenSet = mnLoadHiddenSet(mnCurrentDateKey);
+
         document.getElementById("today").textContent =
             formatDate(data.morning.today);
+
+        const brandDateEl = document.getElementById("brandDate");
+        if (brandDateEl) {
+            brandDateEl.textContent = ymd
+                ? `Phiên giao dịch ngày: ${String(ymd.d).padStart(2,"0")}/${String(ymd.m).padStart(2,"0")}/${ymd.y}`
+                : "Phiên giao dịch ngày: --/--/----";
+        }
 
         // Đưa ngày lên ô input
         if (data.morning.today) {
@@ -83,6 +112,81 @@ function setSection(id, html) {
     if (!el) return;
     const content = (html || "").trim();
     el.innerHTML = content ? content : "<p class='mn-empty'>Chưa có dữ liệu cho mục này.</p>";
+    mnMakeItemsEditable(el);
+}
+
+// ===== Chức năng tick chọn tin cần / không cần =====
+
+function mnHashText(s) {
+    s = (s || "").trim();
+    let h = 5381;
+    for (let i = 0; i < s.length; i++) {
+        h = ((h * 33) ^ s.charCodeAt(i)) >>> 0;
+    }
+    return h.toString(36);
+}
+
+function mnLoadHiddenSet(dateKey) {
+    try {
+        const raw = localStorage.getItem("weha_mn_hidden::" + dateKey);
+        if (!raw) return new Set();
+        return new Set(JSON.parse(raw));
+    } catch (e) {
+        return new Set();
+    }
+}
+
+function mnSaveHiddenSet(dateKey, set) {
+    try {
+        localStorage.setItem("weha_mn_hidden::" + dateKey, JSON.stringify(Array.from(set)));
+    } catch (e) {
+        // localStorage không khả dụng — bỏ qua, chỉ ảnh hưởng trong phiên hiện tại
+    }
+}
+
+// Gắn checkbox tick chọn cho từng dòng tin (mỗi <li>) trong 1 khối nội dung
+function mnMakeItemsEditable(container) {
+
+    const items = container.querySelectorAll("li");
+
+    items.forEach((li) => {
+
+        if (li.classList.contains("mn-item")) return; // đã xử lý rồi
+
+        const hash = mnHashText(li.textContent);
+        const hidden = mnHiddenSet.has(hash);
+
+        // Gom toàn bộ nội dung gốc của <li> vào 1 span để tô gạch ngang nhất quán
+        const textWrap = document.createElement("span");
+        textWrap.className = "mn-text";
+        while (li.firstChild) {
+            textWrap.appendChild(li.firstChild);
+        }
+
+        const check = document.createElement("input");
+        check.type = "checkbox";
+        check.className = "mn-check";
+        check.checked = !hidden;
+        check.setAttribute("aria-label", "Chọn/bỏ tin này");
+
+        check.addEventListener("change", function () {
+            if (check.checked) {
+                mnHiddenSet.delete(hash);
+                li.classList.remove("mn-off");
+            } else {
+                mnHiddenSet.add(hash);
+                li.classList.add("mn-off");
+            }
+            mnSaveHiddenSet(mnCurrentDateKey, mnHiddenSet);
+        });
+
+        li.appendChild(check);
+        li.appendChild(textWrap);
+        li.classList.add("mn-item");
+        if (hidden) li.classList.add("mn-off");
+
+    });
+
 }
 
 function renderMarket(list) {
@@ -204,6 +308,17 @@ async function exportPNG(){
     btn.disabled = true;
     btn.textContent = "⏳ Đang xuất...";
 
+    // Tạm tắt chế độ chỉnh sửa để checkbox không lọt vào ảnh xuất
+    const editBtn = document.getElementById("btnEditMode");
+    const wasEditing = target.classList.contains("mn-editing");
+    if (wasEditing) {
+        target.classList.remove("mn-editing");
+        if (editBtn) {
+            editBtn.classList.remove("active");
+            editBtn.textContent = "✏️ Chỉnh sửa tin";
+        }
+    }
+
     try {
 
         const canvas = await html2canvas(target, {
@@ -229,6 +344,14 @@ async function exportPNG(){
 
         btn.disabled = false;
         btn.textContent = originalLabel;
+
+        if (wasEditing) {
+            target.classList.add("mn-editing");
+            if (editBtn) {
+                editBtn.classList.add("active");
+                editBtn.textContent = "✅ Xong";
+            }
+        }
 
     }
 
