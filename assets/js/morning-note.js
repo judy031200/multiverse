@@ -11,6 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
         loadMorning(this.value);
     });
 
+    // Xuất bản tin ra ảnh PNG
+    const exportBtn = document.getElementById("btnExport");
+    if (exportBtn) {
+        exportBtn.addEventListener("click", exportPNG);
+    }
+
 });
 
 async function loadMorning(date = "") {
@@ -31,28 +37,27 @@ async function loadMorning(date = "") {
 
         const data = await res.json();
 
+        if (!data || !data.morning) {
+            throw new Error("Dữ liệu trả về không hợp lệ");
+        }
+
         // ===== Hiển thị ngày =====
 
         document.getElementById("today").textContent =
             formatDate(data.morning.today);
 
         // Đưa ngày lên ô input
-        document.getElementById("noteDate").value =
-            formatInputDate(data.morning.today);
+        if (data.morning.today) {
+            document.getElementById("noteDate").value =
+                formatInputDate(data.morning.today);
+        }
 
         // ===== Nội dung =====
 
-        document.getElementById("international").innerHTML =
-            data.morning.international || "";
-
-        document.getElementById("domestic").innerHTML =
-            data.morning.domestic || "";
-
-        document.getElementById("corporate").innerHTML =
-            data.morning.corporate || "";
-
-        document.getElementById("other").innerHTML =
-            data.morning.other || "";
+        setSection("international", data.morning.international);
+        setSection("domestic", data.morning.domestic);
+        setSection("corporate", data.morning.corporate);
+        setSection("other", data.morning.other);
 
         renderMarket(data.indexes || []);
 
@@ -60,11 +65,24 @@ async function loadMorning(date = "") {
 
         console.error("Morning API Error:", err);
 
-        document.getElementById("international").innerHTML =
-            "<p>⚠️ Không tải được dữ liệu.</p>";
+        const msg = "<p class='mn-error'>⚠️ Không tải được dữ liệu. Vui lòng thử lại sau.</p>";
+
+        ["international", "domestic", "corporate", "other"].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = msg;
+        });
+
+        renderMarket([]);
 
     }
 
+}
+
+function setSection(id, html) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const content = (html || "").trim();
+    el.innerHTML = content ? content : "<p class='mn-empty'>Chưa có dữ liệu cho mục này.</p>";
 }
 
 function renderMarket(list) {
@@ -75,7 +93,7 @@ function renderMarket(list) {
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="4" style="text-align:center">
+                <td colspan="4" style="text-align:center;color:rgba(253,251,245,.6);padding:16px;">
                     Không có dữ liệu
                 </td>
             </tr>
@@ -125,6 +143,8 @@ function formatDate(dateString){
 
     const d = new Date(dateString);
 
+    if (isNaN(d.getTime())) return "";
+
     return d.toLocaleDateString("vi-VN",{
         weekday:"long",
         day:"2-digit",
@@ -141,6 +161,8 @@ function formatInputDate(dateString){
 
     const d = new Date(dateString);
 
+    if (isNaN(d.getTime())) return "";
+
     const yyyy = d.getFullYear();
 
     const mm = String(d.getMonth()+1).padStart(2,"0");
@@ -148,5 +170,50 @@ function formatInputDate(dateString){
     const dd = String(d.getDate()).padStart(2,"0");
 
     return `${yyyy}-${mm}-${dd}`;
+
+}
+
+// ===== Xuất bản tin sáng ra ảnh PNG (dùng html2canvas) =====
+async function exportPNG(){
+
+    const btn = document.getElementById("btnExport");
+    const target = document.getElementById("mn-capture");
+
+    if (!target || typeof html2canvas === "undefined") {
+        alert("Không thể xuất ảnh lúc này, vui lòng thử lại.");
+        return;
+    }
+
+    const originalLabel = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "⏳ Đang xuất...";
+
+    try {
+
+        const canvas = await html2canvas(target, {
+            backgroundColor: "#f8f6f0",
+            scale: 2,
+            useCORS: true
+        });
+
+        const dateVal = document.getElementById("noteDate").value ||
+            formatInputDate(new Date());
+
+        const link = document.createElement("a");
+        link.download = `ban-tin-sang-${dateVal || "weha"}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+
+    } catch (err) {
+
+        console.error("Export PNG error:", err);
+        alert("Xuất ảnh thất bại, vui lòng thử lại.");
+
+    } finally {
+
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+
+    }
 
 }
