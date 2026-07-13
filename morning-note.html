@@ -11,8 +11,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/img/logo-cropped.png">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/morning-note.css">
 </head>
-<body>
+<body class="morning-page">
 <div class="page">
 
   <section class="brand-shell">
@@ -61,74 +62,76 @@
     <a class="tab-btn" href="su-kien.html">Sự kiện</a>
     <a class="tab-btn" href="nhat-ky.html">Nhật ký đầu tư</a>
     <a class="tab-btn active" href="morning-note.html">Bản tin sáng</a>
+    <a class="tab-btn" href="portfolio.html">Danh mục đầu tư</a>
   </div>
 
-  <div id="panel-morning">
-    <div class="toolbar" style="margin-bottom:6px;">
-      <div class="header-right" style="flex:1;">
-        <h1 style="font-family:var(--font-display);font-size:16px;font-weight:800;color:var(--navy);margin-bottom:2px;">Bản tin hôm nay</h1>
-        <div id="today" style="font-size:12.5px;color:var(--ink-soft);"></div>
-      </div>
-      <div class="date-toolbar" style="margin-top:0;">
-        <label for="noteDate">📅 Chọn ngày:</label>
-        <input type="date" id="noteDate">
-      </div>
+  <div class="mn-toolbar">
+    <div class="mn-heading">
+      <h1>Bản tin hôm nay</h1>
+      <div id="today" class="mn-today"></div>
     </div>
+    <div class="date-toolbar">
+      <label for="noteDate">📅 Chọn ngày:</label>
+      <input type="date" id="noteDate">
+    </div>
+  </div>
 
-    <main class="wrapper" style="padding-left:0;padding-right:0;">
+  <div id="mn-capture">
+    <div id="panel-morning">
+      <main class="wrapper">
 
-      <section class="left-panel">
-        <div class="news-card">
-          <div class="title">🌍 Điểm tin quốc tế</div>
-          <div id="international"><p class="mn-empty">Đang tải...</p></div>
-        </div>
-        <div class="news-card">
-          <div class="title">🇻🇳 Điểm tin trong nước</div>
-          <div id="domestic"><p class="mn-empty">Đang tải...</p></div>
-        </div>
-        <div class="news-card">
-          <div class="title">🏢 Tin doanh nghiệp</div>
-          <div id="corporate"><p class="mn-empty">Đang tải...</p></div>
-        </div>
-        <div class="news-card">
-          <div class="title">📌 Tin khác</div>
-          <div id="other"><p class="mn-empty">Đang tải...</p></div>
-        </div>
-      </section>
-
-      <aside class="right-panel">
-        <div class="market-card">
-          <h2>📊 Chỉ số thị trường</h2>
-          <div class="market-table-scroll">
-            <table class="market-table">
-              <thead><tr><th>Chỉ số</th><th>Điểm</th><th>+/-</th><th>%</th></tr></thead>
-              <tbody id="marketTable"><tr><td colspan="4" style="text-align:center;color:rgba(253,251,245,.6);padding:16px;">Đang tải...</td></tr></tbody>
-            </table>
+        <section class="left-panel">
+          <div class="news-card">
+            <div class="title">🌍 Điểm tin quốc tế</div>
+            <div id="international"><p class="mn-empty">Đang tải...</p></div>
           </div>
-        </div>
-      </aside>
+          <div class="news-card">
+            <div class="title">🇻🇳 Điểm tin trong nước</div>
+            <div id="domestic"><p class="mn-empty">Đang tải...</p></div>
+          </div>
+          <div class="news-card">
+            <div class="title">🏢 Tin doanh nghiệp</div>
+            <div id="corporate"><p class="mn-empty">Đang tải...</p></div>
+          </div>
+          <div class="news-card">
+            <div class="title">📌 Tin khác</div>
+            <div id="other"><p class="mn-empty">Đang tải...</p></div>
+          </div>
+        </section>
 
-    </main>
+        <aside class="right-panel">
+          <div class="market-card">
+            <h2>📊 Chỉ số thị trường</h2>
+            <div class="market-table-scroll">
+              <table class="market-table">
+                <thead><tr><th>Chỉ số</th><th>Điểm</th><th>+/-</th><th>%</th></tr></thead>
+                <tbody id="marketTable"><tr><td colspan="4" style="text-align:center;color:rgba(253,251,245,.6);padding:16px;">Đang tải...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </aside>
+
+      </main>
+    </div>
+
+    <div class="watermark">WeHa</div>
+
+    <footer>
+      <div class="footer-left">
+        <div>📧 hello@weha.com.vn</div>
+        <div>🌐 weha.com.vn</div>
+      </div>
+      <div class="footer-right">
+        <img src="assets/img/logo-cropped.png" class="qr" alt="WeHa">
+      </div>
+    </footer>
   </div>
-
-  <div class="watermark">WeHa</div>
-
-  <footer>
-    <div class="footer-left">
-      <div>📧 hello@weha.com.vn</div>
-      <div>🌐 weha.com.vn</div>
-    </div>
-    <div class="footer-right">
-      <img src="assets/img/logo-cropped.png" class="qr" alt="WeHa">
-    </div>
-  </footer>
 
 </div>
 
 <button id="btnExport">📸 Xuất PNG</button>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="assets/js/common.js"></script>
 <script src="assets/js/morning-note.js"></script>
 </body>
 </html>
