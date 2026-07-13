@@ -28,6 +28,24 @@ body.morning-page{
 .mn-heading h1{font-size:17px;font-weight:800;color:var(--weha-navy);letter-spacing:-.01em;margin-bottom:2px}
 .mn-today{font-size:12.5px;color:var(--weha-muted);text-transform:capitalize}
 
+.mn-toolbar-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+.mn-edit-btn{
+  background:#fff;
+  border:1px solid var(--weha-line);
+  color:var(--weha-navy);
+  border-radius:20px;
+  padding:7px 14px;
+  font-size:12.5px;
+  font-weight:700;
+  font-family:inherit;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.mn-edit-btn:hover{background:#f2f5fa}
+.mn-edit-btn.active{background:var(--weha-navy);color:#fff;border-color:var(--weha-navy)}
+
 .date-toolbar{display:flex;align-items:center;gap:8px}
 .date-toolbar label{font-size:12.5px;color:var(--weha-muted);font-weight:600;white-space:nowrap}
 .date-toolbar input[type="date"]{
@@ -44,12 +62,33 @@ body.morning-page{
 .date-toolbar input[type="date"]:focus{border-color:var(--weha-blue);box-shadow:0 0 0 3px rgba(13,79,159,.09)}
 
 /* ===== Khối gói gọn để xuất ảnh (giữa toolbar và footer) ===== */
-#mn-capture{position:relative;overflow:hidden;border-radius:10px}
+#mn-capture{position:relative;overflow:hidden;border-radius:10px;background:#fff}
+
+/* ===== Header thương hiệu (nằm trong ảnh xuất) ===== */
+.mn-brand-header{
+  position:relative;
+  z-index:2;
+  background:linear-gradient(90deg,#f7cd4c 0%,#eda934 100%);
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.mn-brand-left{display:flex;align-items:center;gap:10px}
+.mn-brand-logo{height:32px;width:auto;object-fit:contain;flex-shrink:0}
+.mn-brand-title{display:flex;flex-direction:column;line-height:1.3}
+.mn-brand-title strong{font-size:16px;font-weight:800;color:var(--weha-navy);letter-spacing:-.01em}
+.mn-brand-title span{font-size:11px;color:rgba(8,47,102,.7);font-weight:600}
+.mn-brand-date{font-size:12.5px;font-weight:700;color:var(--weha-navy);white-space:nowrap}
+
+#panel-morning{position:relative;z-index:1;padding:18px 18px 0}
 
 /* ===== Layout 2 cột: tin tức trái / chỉ số phải ===== */
 .wrapper{
   display:grid;
-  grid-template-columns:1fr 320px;
+  grid-template-columns:1fr 380px;
   gap:20px;
   align-items:start;
   padding:0 !important;
@@ -85,6 +124,33 @@ body.morning-page{
 .mn-empty{color:#98a2b3;font-style:italic;font-size:13px}
 .mn-error{color:var(--weha-red);font-size:13px}
 
+/* ===== Chế độ chỉnh sửa: tick chọn tin cần/không cần ===== */
+.news-card li.mn-item{position:relative}
+.news-card li.mn-item .mn-check{display:none}
+
+#mn-capture.mn-editing .news-card li.mn-item{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  padding:3px 6px;
+  margin:0 -6px 6px;
+  border-radius:6px;
+  transition:background .15s;
+}
+#mn-capture.mn-editing .news-card li.mn-item:hover{background:#f5f7fb}
+#mn-capture.mn-editing .news-card li.mn-item .mn-check{
+  display:inline-block;
+  margin-top:4px;
+  flex-shrink:0;
+  width:14px;height:14px;
+  cursor:pointer;
+  accent-color:var(--weha-blue);
+}
+#mn-capture.mn-editing .news-card li.mn-item.mn-off{opacity:.4}
+#mn-capture.mn-editing .news-card li.mn-item.mn-off .mn-text{text-decoration:line-through}
+
+#mn-capture:not(.mn-editing) .news-card li.mn-item.mn-off{display:none}
+
 /* ===== Bảng chỉ số thị trường (sidebar tối) ===== */
 .market-card{
   background:var(--weha-navy);
@@ -101,7 +167,11 @@ body.morning-page{
 .market-table-scroll::-webkit-scrollbar{width:6px}
 .market-table-scroll::-webkit-scrollbar-thumb{background:rgba(253,251,245,.25);border-radius:999px}
 
-.market-table{width:100%;border-collapse:separate;border-spacing:0}
+.market-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed}
+.market-table col.mn-col-name{width:38%}
+.market-table col.mn-col-close{width:24%}
+.market-table col.mn-col-chg{width:19%}
+.market-table col.mn-col-pct{width:19%}
 .market-table thead th{
   position:sticky;top:0;
   background:var(--weha-navy);
@@ -113,33 +183,39 @@ body.morning-page{
   padding:6px 4px 8px;
   border-bottom:1px solid rgba(253,251,245,.15);
   font-weight:700;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 .market-table thead th:not(:first-child){text-align:right}
 .market-table tbody td{
   padding:9px 4px;
-  font-size:12.5px;
+  font-size:12px;
   border-bottom:1px solid rgba(253,251,245,.08);
   font-variant-numeric:tabular-nums;
   color:#fdfbf5;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 .market-table tbody tr:last-child td{border-bottom:none}
-.market-table tbody td:first-child{font-weight:700}
-.market-table td.up{color:#7fe0ab;text-align:right;font-weight:700}
-.market-table td.down{color:#f2a8a2;text-align:right;font-weight:700}
+.market-table tbody td:first-child{font-weight:700;white-space:normal;word-break:break-word;overflow:visible;text-overflow:clip}
+.market-table td.up{color:#7fe0ab;text-align:right;font-weight:700;white-space:nowrap}
+.market-table td.down{color:#f2a8a2;text-align:right;font-weight:700;white-space:nowrap}
 
 /* ===== Watermark ===== */
 .watermark{
   position:absolute;
   top:50%;left:50%;
   transform:translate(-50%,-50%) rotate(-24deg);
-  font-size:min(14vw,140px);
+  font-size:min(13vw,130px);
   font-weight:800;
-  color:rgba(8,47,102,.035);
+  color:rgba(8,47,102,.09);
   letter-spacing:.02em;
   white-space:nowrap;
   pointer-events:none;
   user-select:none;
-  z-index:0;
+  z-index:3;
+  mix-blend-mode:multiply;
 }
 
 /* ===== Footer ===== */
@@ -161,8 +237,6 @@ body.morning-page{
 .footer-left div{margin-bottom:2px}
 .footer-right{display:flex;align-items:center}
 .footer-right .qr{width:34px;height:34px;object-fit:contain;border-radius:6px;mix-blend-mode:multiply}
-
-#panel-morning{position:relative;z-index:1}
 
 /* ===== Nút xuất PNG ===== */
 #btnExport{
@@ -193,6 +267,12 @@ body.morning-page{
 @media(max-width:640px){
   .mn-toolbar{padding:12px 14px}
   .mn-heading h1{font-size:15px}
+  .mn-brand-header{padding:10px 14px}
+  .mn-brand-logo{height:24px}
+  .mn-brand-title strong{font-size:14px}
+  .mn-brand-title span{display:none}
+  .mn-brand-date{font-size:11px}
+  #panel-morning{padding:14px 14px 0}
   .news-card{padding:14px 15px}
   #mn-capture footer{padding:14px 16px 4px}
   #btnExport{right:12px;bottom:12px;padding:10px 16px;font-size:12px}
