@@ -10,7 +10,7 @@ body.morning-page{
 /* Trang bản tin sáng không cần hero quảng bá — chỉ hiện tabs + nội dung */
 .morning-page .brand-shell{display:none}
 .morning-page .tabs{margin-top:0}
-
+ 
 /* ===== Toolbar tiêu đề + chọn ngày ===== */
 .mn-toolbar{
   background:#fff;
@@ -88,7 +88,7 @@ body.morning-page{
 /* ===== Layout 2 cột: tin tức trái / chỉ số phải ===== */
 .wrapper{
   display:grid;
-  grid-template-columns:1fr 450px;
+  grid-template-columns:1fr 550px;
   gap:20px;
   align-items:start;
   padding:0 !important;
