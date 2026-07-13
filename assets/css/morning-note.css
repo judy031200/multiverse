@@ -152,55 +152,124 @@ body.morning-page{
 #mn-capture:not(.mn-editing) .news-card li.mn-item.mn-off{display:none}
 
 /* ===== Bảng chỉ số thị trường (sidebar tối) ===== */
+/* ===== Bảng chỉ số thị trường ===== */
 .market-card{
-  background:var(--weha-navy);
-  color:#fdfbf5;
-  border-radius:10px;
-  padding:18px 18px 6px;
-  box-shadow:0 18px 40px rgba(8,47,102,.24);
+  background: var(--weha-navy);
+  color:#fff;
+  border-radius:14px;
+  padding:22px;
+  box-shadow:0 20px 45px rgba(8,47,102,.22);
   position:sticky;
   top:78px;
 }
-.market-card h2{font-size:15px;font-weight:700;margin-bottom:12px;letter-spacing:-.005em;color:#fdfbf5}
 
-.market-table-scroll{max-height:74vh;overflow-y:auto}
-.market-table-scroll::-webkit-scrollbar{width:6px}
-.market-table-scroll::-webkit-scrollbar-thumb{background:rgba(253,251,245,.25);border-radius:999px}
-
-.market-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed}
-.market-table col.mn-col-name{width:38%}
-.market-table col.mn-col-close{width:24%}
-.market-table col.mn-col-chg{width:19%}
-.market-table col.mn-col-pct{width:19%}
-.market-table thead th{
-  position:sticky;top:0;
-  background:var(--weha-navy);
-  font-size:9.5px;
-  text-transform:uppercase;
-  letter-spacing:.06em;
-  color:rgba(253,251,245,.55);
-  text-align:left;
-  padding:6px 4px 8px;
-  border-bottom:1px solid rgba(253,251,245,.15);
+.market-card h2{
+  font-size:18px;
   font-weight:700;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  margin-bottom:16px;
+  color:#fff;
+}
+
+/* Scroll */
+.market-table-scroll{
+  max-height:74vh;
+  overflow-y:auto;
+}
+
+.market-table-scroll::-webkit-scrollbar{
+  width:6px;
+}
+
+.market-table-scroll::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.18);
+  border-radius:999px;
+}
+
+/* Table */
+.market-table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+
+/* Tỷ lệ cột */
+.market-table col.mn-col-name{width:42%}
+.market-table col.mn-col-close{width:22%}
+.market-table col.mn-col-chg{width:18%}
+.market-table col.mn-col-pct{width:18%}
+
+/* Header */
+.market-table thead th{
+  position:sticky;
+  top:0;
+  background:var(--weha-navy);
+  color:rgba(255,255,255,.58);
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  padding:10px 6px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+
+.market-table thead th:first-child{
+  text-align:left;
+}
+
+.market-table thead th:not(:first-child){
+  text-align:right;
+}
+
+/* Body */
+.market-table tbody td{
+  padding:14px 6px;
+  font-size:14px;
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  font-variant-numeric:tabular-nums;
+  vertical-align:middle;
+}
+
+/* Hover */
+.market-table tbody tr{
+  transition:.18s;
+}
+
+.market-table tbody tr:hover{
+  background:rgba(255,255,255,.04);
+}
+
+.market-table tbody tr:last-child td{
+  border-bottom:none;
+}
+
+/* Tên chỉ số */
+.market-table tbody td:first-child{
+  font-weight:700;
+  line-height:1.35;
+  white-space:normal;
+  word-break:normal;
+  overflow:visible;
+}
+
+/* Các cột số */
+.market-table tbody td:nth-child(2),
+.market-table tbody td:nth-child(3),
+.market-table tbody td:nth-child(4){
+  text-align:right;
   white-space:nowrap;
 }
-.market-table thead th:not(:first-child){text-align:right}
-.market-table tbody td{
-  padding:9px 4px;
-  font-size:12px;
-  border-bottom:1px solid rgba(253,251,245,.08);
-  font-variant-numeric:tabular-nums;
-  color:#fdfbf5;
-  overflow:hidden;
-  text-overflow:ellipsis;
+
+/* Màu tăng giảm */
+.market-table td.up{
+  color:#6EE7A5;
+  font-weight:700;
 }
-.market-table tbody tr:last-child td{border-bottom:none}
-.market-table tbody td:first-child{font-weight:700;white-space:normal;word-break:break-word;overflow:visible;text-overflow:clip}
-.market-table td.up{color:#7fe0ab;text-align:right;font-weight:700;white-space:nowrap}
-.market-table td.down{color:#f2a8a2;text-align:right;font-weight:700;white-space:nowrap}
+
+.market-table td.down{
+  color:#FFAAA3;
+  font-weight:700;
+}
 
 /* ===== Watermark ===== */
 .watermark{
