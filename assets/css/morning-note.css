@@ -10,7 +10,7 @@ body.morning-page{
 /* Trang bản tin sáng không cần hero quảng bá — chỉ hiện tabs + nội dung */
 .morning-page .brand-shell{display:none}
 .morning-page .tabs{margin-top:0}
- 
+
 /* ===== Toolbar tiêu đề + chọn ngày ===== */
 .mn-toolbar{
   background:#fff;
@@ -61,6 +61,20 @@ body.morning-page{
 }
 .date-toolbar input[type="date"]:focus{border-color:var(--weha-blue);box-shadow:0 0 0 3px rgba(13,79,159,.09)}
 
+.mn-date-warning{
+  background:#fff7e0;
+  border:1px solid #f2d98a;
+  color:#8a6413;
+  border-radius:8px;
+  padding:10px 16px;
+  font-size:12.5px;
+  font-weight:600;
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
 /* ===== Khối gói gọn để xuất ảnh (giữa toolbar và footer) ===== */
 #mn-capture{position:relative;overflow:hidden;border-radius:10px;background:#fff}
 
@@ -88,8 +102,8 @@ body.morning-page{
 /* ===== Layout 2 cột: tin tức trái / chỉ số phải ===== */
 .wrapper{
   display:grid;
-  grid-template-columns:1fr 500px;
-  gap:15px;
+  grid-template-columns:1fr 440px;
+  gap:20px;
   align-items:start;
   padding:0 !important;
 }
@@ -152,124 +166,55 @@ body.morning-page{
 #mn-capture:not(.mn-editing) .news-card li.mn-item.mn-off{display:none}
 
 /* ===== Bảng chỉ số thị trường (sidebar tối) ===== */
-/* ===== Bảng chỉ số thị trường ===== */
 .market-card{
-  background: var(--weha-navy);
-  color:#fff;
-  border-radius:14px;
-  padding:22px;
-  box-shadow:0 20px 45px rgba(8,47,102,.22);
+  background:var(--weha-navy);
+  color:#fdfbf5;
+  border-radius:10px;
+  padding:18px 18px 6px;
+  box-shadow:0 18px 40px rgba(8,47,102,.24);
   position:sticky;
   top:78px;
 }
+.market-card h2{font-size:15px;font-weight:700;margin-bottom:12px;letter-spacing:-.005em;color:#fdfbf5}
 
-.market-card h2{
-  font-size:18px;
-  font-weight:700;
-  margin-bottom:16px;
-  color:#fff;
-}
+.market-table-scroll{max-height:74vh;overflow-y:auto}
+.market-table-scroll::-webkit-scrollbar{width:6px}
+.market-table-scroll::-webkit-scrollbar-thumb{background:rgba(253,251,245,.25);border-radius:999px}
 
-/* Scroll */
-.market-table-scroll{
-  max-height:74vh;
-  overflow-y:auto;
-}
-
-.market-table-scroll::-webkit-scrollbar{
-  width:6px;
-}
-
-.market-table-scroll::-webkit-scrollbar-thumb{
-  background:rgba(255,255,255,.18);
-  border-radius:999px;
-}
-
-/* Table */
-.market-table{
-  width:100%;
-  border-collapse:collapse;
-  table-layout:fixed;
-}
-
-/* Tỷ lệ cột */
-.market-table col.mn-col-name{width:42%}
-.market-table col.mn-col-close{width:22%}
-.market-table col.mn-col-chg{width:18%}
-.market-table col.mn-col-pct{width:18%}
-
-/* Header */
+.market-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed}
+.market-table col.mn-col-name{width:33%}
+.market-table col.mn-col-close{width:25%}
+.market-table col.mn-col-chg{width:21%}
+.market-table col.mn-col-pct{width:21%}
 .market-table thead th{
-  position:sticky;
-  top:0;
+  position:sticky;top:0;
   background:var(--weha-navy);
-  color:rgba(255,255,255,.58);
-  font-size:11px;
-  font-weight:700;
+  font-size:9.5px;
   text-transform:uppercase;
-  letter-spacing:.08em;
-  padding:10px 6px;
-  border-bottom:1px solid rgba(255,255,255,.14);
-}
-
-.market-table thead th:first-child{
+  letter-spacing:.06em;
+  color:rgba(253,251,245,.55);
   text-align:left;
-}
-
-.market-table thead th:not(:first-child){
-  text-align:right;
-}
-
-/* Body */
-.market-table tbody td{
-  padding:14px 6px;
-  font-size:14px;
-  color:#fff;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  font-variant-numeric:tabular-nums;
-  vertical-align:middle;
-}
-
-/* Hover */
-.market-table tbody tr{
-  transition:.18s;
-}
-
-.market-table tbody tr:hover{
-  background:rgba(255,255,255,.04);
-}
-
-.market-table tbody tr:last-child td{
-  border-bottom:none;
-}
-
-/* Tên chỉ số */
-.market-table tbody td:first-child{
+  padding:6px 3px 8px;
+  border-bottom:1px solid rgba(253,251,245,.15);
   font-weight:700;
-  line-height:1.35;
-  white-space:normal;
-  word-break:normal;
-  overflow:visible;
-}
-
-/* Các cột số */
-.market-table tbody td:nth-child(2),
-.market-table tbody td:nth-child(3),
-.market-table tbody td:nth-child(4){
-  text-align:right;
+  overflow:hidden;
+  text-overflow:ellipsis;
   white-space:nowrap;
 }
-
-/* Màu tăng giảm */
-.market-table td.up{
-  color:#6EE7A5;
-  font-weight:700;
+.market-table thead th:not(:first-child){text-align:right}
+.market-table tbody td{
+  padding:9px 3px;
+  font-size:11.5px;
+  border-bottom:1px solid rgba(253,251,245,.08);
+  font-variant-numeric:tabular-nums;
+  color:#fdfbf5;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
-
-.market-table td.down{
-  color:#FFAAA3;
-  font-weight:700;
-}
+.market-table tbody tr:last-child td{border-bottom:none}
+.market-table tbody td:first-child{font-size:12.5px;font-weight:700;white-space:normal;word-break:break-word;overflow:visible;text-overflow:clip}
+.market-table td.up{color:#7fe0ab;text-align:right;font-weight:700;white-space:nowrap}
+.market-table td.down{color:#f2a8a2;text-align:right;font-weight:700;white-space:nowrap}
 
 /* ===== Watermark ===== */
 .watermark{
