@@ -33,26 +33,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+async function fetchMorningJson(date) {
+
+    let url = API;
+
+    if (date) {
+        url += "&date=" + encodeURIComponent(date);
+    }
+
+    const res = await fetch(url);
+
+    if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    if (!data || !data.morning) {
+        throw new Error("Dữ liệu trả về không hợp lệ");
+    }
+
+    return data;
+
+}
+
+function mnSameYMD(a, b) {
+    if (!a || !b) return false;
+    return a.y === b.y && a.m === b.m && a.d === b.d;
+}
+
+function mnFormatDDMMYYYY(ymd) {
+    if (!ymd) return "";
+    return `${String(ymd.d).padStart(2,"0")}/${String(ymd.m).padStart(2,"0")}/${ymd.y}`;
+}
+
 async function loadMorning(date = "") {
+
+    const isUserSelected = !!date; // true nếu do người dùng chủ động chọn ngày
+    const warnEl = document.getElementById("mnDateWarning");
+    if (warnEl) warnEl.style.display = "none";
 
     try {
 
-        let url = API;
+        let data = await fetchMorningJson(date);
 
-        if (date) {
-            url += "&date=" + date;
-        }
+        // Nếu người dùng chọn 1 ngày cụ thể nhưng server trả về ngày khác
+        // (do sai định dạng ngày hoặc ngày đó chưa có bản tin) -> thử lại
+        // với định dạng dd/MM/yyyy trước khi kết luận là không có dữ liệu.
+        if (isUserSelected) {
 
-        const res = await fetch(url);
+            const requestedYMD = extractYMD(date);
+            let returnedYMD = extractYMD(data?.morning?.today);
 
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+            if (!mnSameYMD(requestedYMD, returnedYMD)) {
 
-        const data = await res.json();
+                const altDate = mnFormatDDMMYYYY(requestedYMD);
 
-        if (!data || !data.morning) {
-            throw new Error("Dữ liệu trả về không hợp lệ");
+                try {
+                    const retryData = await fetchMorningJson(altDate);
+                    const retryYMD = extractYMD(retryData?.morning?.today);
+
+                    if (mnSameYMD(requestedYMD, retryYMD)) {
+                        data = retryData;
+                        returnedYMD = retryYMD;
+                    }
+                } catch (e) {
+                    // giữ nguyên kết quả lần fetch đầu nếu lần thử lại lỗi
+                }
+
+            }
+
+            if (!mnSameYMD(requestedYMD, returnedYMD) && warnEl) {
+                const reqStr = requestedYMD
+                    ? `${String(requestedYMD.d).padStart(2,"0")}/${String(requestedYMD.m).padStart(2,"0")}/${requestedYMD.y}`
+                    : date;
+                const retStr = returnedYMD
+                    ? `${String(returnedYMD.d).padStart(2,"0")}/${String(returnedYMD.m).padStart(2,"0")}/${returnedYMD.y}`
+                    : "gần nhất";
+                warnEl.textContent = `⚠️ Chưa có bản tin cho ngày ${reqStr}. Đang hiển thị bản tin gần nhất (${retStr}).`;
+                warnEl.style.display = "flex";
+            }
+
         }
 
         // ===== Hiển thị ngày =====
@@ -75,8 +136,9 @@ async function loadMorning(date = "") {
                 : "Phiên giao dịch ngày: --/--/----";
         }
 
-        // Đưa ngày lên ô input
-        if (data.morning.today) {
+        // Chỉ tự đưa ngày lên ô input khi đây là lần tải đầu (chưa phải do
+        // người dùng chọn) — tránh việc ghi đè lựa chọn của người dùng.
+        if (!isUserSelected && data.morning.today) {
             document.getElementById("noteDate").value =
                 formatInputDate(data.morning.today);
         }
