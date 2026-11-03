@@ -40,7 +40,6 @@
         <p>Điểm trạng thái thị trường 0–100 từ vĩ mô, lãi suất, định giá, thanh khoản và xu hướng; tỷ trọng cổ phiếu gợi ý và kết quả backtest từ 2016.</p>
         <div class="hero-cta">
           <a class="primary-link" href="#panel-thermo">Xem kết quả</a>
-          <a class="secondary-link" id="full-link" href="#" target="_blank" rel="noopener">Phân tích đầy đủ</a>
         </div>
       </div>
       <div class="market-visual" aria-label="Thông tin cập nhật">
@@ -82,7 +81,6 @@
   var frame = document.getElementById("thermo");
   frame.src = BASE + "/ket-qua";
   document.getElementById("open-link").href = BASE + "/ket-qua";
-  document.getElementById("full-link").href = BASE + "/";
   // Trang nhúng báo chiều cao để khung giãn đúng, không có thanh cuộn kép.
   window.addEventListener("message", function (e) {
     if (e.origin !== BASE || !e.data || typeof e.data.nhietkeHeight !== "number") return;
