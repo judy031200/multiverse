@@ -80,9 +80,9 @@
   // Đổi BASE khi gắn tên miền riêng, ví dụ "https://nhietke.weha.com.vn".
   var BASE = "https://nhiet-ke-thi-truong.pages.dev";
   var frame = document.getElementById("thermo");
-  frame.src = BASE + "/ket-qua.html";
-  document.getElementById("open-link").href = BASE + "/ket-qua.html";
-  document.getElementById("full-link").href = BASE + "/index.html";
+  frame.src = BASE + "/ket-qua";
+  document.getElementById("open-link").href = BASE + "/ket-qua";
+  document.getElementById("full-link").href = BASE + "/";
   // Trang nhúng báo chiều cao để khung giãn đúng, không có thanh cuộn kép.
   window.addEventListener("message", function (e) {
     if (e.origin !== BASE || !e.data || typeof e.data.nhietkeHeight !== "number") return;
