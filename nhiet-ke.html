@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WeHa Multiverse | Nhiệt kế thị trường</title>
+<meta name="description" content="Điểm trạng thái thị trường chứng khoán Việt Nam 0–100, tỷ trọng cổ phiếu gợi ý và backtest từ 2016, cập nhật tự động mỗi ngày giao dịch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/img/logo-cropped.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .thermo-frame{width:100%;border:0;display:block;min-height:1600px;border-radius:12px;background:#eef1f6}
+  .thermo-links{display:flex;gap:16px;flex-wrap:wrap;justify-content:flex-end;margin:6px 2px 10px;font-size:13px}
+  .thermo-links a{color:#0f1f3a;font-weight:600;text-decoration:none}
+  .thermo-links a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="page">
+  <section class="brand-shell">
+    <div class="brand-nav">
+      <div class="brand-logo">
+        <img src="assets/img/logo-cropped.png" alt="WeHa">
+        <div class="brand-kicker">
+          <strong>WeHa Multiverse</strong>
+          <span>Signal engine for disciplined execution</span>
+        </div>
+      </div>
+      <div class="brand-actions">
+        <span class="brand-pill">Market regime</span>
+        <span class="brand-pill">Risk-aware</span>
+      </div>
+    </div>
+    <div class="brand-hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Market thermometer</div>
+        <h1>Nhiệt kế thị trường</h1>
+        <p>Điểm trạng thái thị trường 0–100 từ vĩ mô, lãi suất, định giá, thanh khoản và xu hướng; tỷ trọng cổ phiếu gợi ý và kết quả backtest từ 2016.</p>
+        <div class="hero-cta">
+          <a class="primary-link" href="#panel-thermo">Xem kết quả</a>
+          <a class="secondary-link" id="full-link" href="#" target="_blank" rel="noopener">Phân tích đầy đủ</a>
+        </div>
+      </div>
+      <div class="market-visual" aria-label="Thông tin cập nhật">
+        <div class="market-visual-top">
+          <div class="market-index"><strong>Quang Trung Invest</strong><span>Mô hình định lượng</span></div>
+          <div class="market-gain">Auto</div>
+        </div>
+        <div class="chart-line"></div>
+        <div class="metric-row">
+          <div class="metric"><span>Thang điểm</span><strong>0–100</strong></div>
+          <div class="metric"><span>Backtest</span><strong>2016+</strong></div>
+          <div class="metric"><span>Cập nhật</span><strong>19:30</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tabs">
+    <a class="tab-btn" href="index.html">Tất cả báo cáo</a>
+    <a class="tab-btn" href="tra-cuu.html">Tra cứu mã</a>
+    <a class="tab-btn" href="tin-hieu.html">Tín hiệu</a>
+    <a class="tab-btn" href="su-kien.html">Sự kiện</a>
+    <a class="tab-btn" href="nhat-ky.html">Nhật ký đầu tư</a>
+    <a class="tab-btn" href="morning-note.html">Bản tin sáng</a>
+    <a class="tab-btn active" href="nhiet-ke.html">Nhiệt kế thị trường</a>
+  </div>
+
+  <div class="tab-panel active" id="panel-thermo">
+    <div class="thermo-links">
+      <a id="open-link" href="#" target="_blank" rel="noopener">Mở toàn màn hình ↗</a>
+    </div>
+    <iframe class="thermo-frame" id="thermo" title="Nhiệt kế thị trường"></iframe>
+  </div>
+</div>
+<script>
+  // Trang nhiệt kế đặt trên Cloudflare Pages, tự cập nhật 19:30 mỗi ngày giao dịch.
+  // Đổi BASE khi gắn tên miền riêng, ví dụ "https://nhietke.weha.com.vn".
+  var BASE = "https://nhiet-ke-thi-truong.pages.dev";
+  var frame = document.getElementById("thermo");
+  frame.src = BASE + "/ket-qua.html";
+  document.getElementById("open-link").href = BASE + "/ket-qua.html";
+  document.getElementById("full-link").href = BASE + "/index.html";
+  // Trang nhúng báo chiều cao để khung giãn đúng, không có thanh cuộn kép.
+  window.addEventListener("message", function (e) {
+    if (e.origin !== BASE || !e.data || typeof e.data.nhietkeHeight !== "number") return;
+    frame.style.height = Math.max(600, Math.ceil(e.data.nhietkeHeight)) + "px";
+  });
+</script>
+</body>
+</html>
